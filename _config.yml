@@ -1,0 +1,53 @@
+# Site settings
+title : Sun's Blog
+head_title : my
+description: desc
+tagline: mytag
+url:
+author:
+    name: Sun
+    github: YurieSun
+    email: 757075280@qq.com
+    twitter:
+    facebook:
+    weibo:
+    zhihu: 
+    wiki: wiki
+    stackoverflow: 
+atom_path: /atom.xml
+rss_path: /rss.xml
+donate_url:
+
+# Outputting
+permalink: /:categories/:title
+paginate_path: /page:num
+paginate: 15
+timezone: Asia/Shanghai
+
+# Handling Reading
+safe:         false
+include:      []
+exclude:      [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+keep_files:   []
+encoding:     "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+textile_ext:  "textile"
+
+# Filtering Content
+show_drafts: null
+limit_posts: 0
+future:      true
+unpublished: false
+
+# Plugins
+whitelist: []
+plugins:   [jekyll-paginate]
+
+# Conversion
+markdown:    kramdown
+highlighter: pygments
+lsi:         false
+excerpt_separator: "\n\n"
+
+# Backwards-compatibility
+relative_permalinks: false
