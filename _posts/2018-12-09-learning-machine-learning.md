@@ -7,7 +7,7 @@ category: Learning
 tags: [machine learning]
 ---
 
-课程地址：[Machine Learning ](https://www.coursera.org/learn/machine-learning)"
+课程地址：[Machine Learning ](https://www.coursera.org/learn/machine-learning)
 
 ## （一）线性回归、梯度下降与正规方程组
 
