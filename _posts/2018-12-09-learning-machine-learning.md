@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "机器学习笔记"
-description: "学习资料：[Machine Learning (Andrew Ng)](https://www.andrewng.org/courses/)"
+description: "学习资料：Machine Learning (Andrew Ng)"
 keywords: test
 category: Learning
 tags: [machine learning]
 ---
+
+课程地址：[Machine Learning ](https://www.coursera.org/learn/machine-learning)"
 
 ## （一）线性回归、梯度下降与正规方程组
 
