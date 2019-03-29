@@ -41,8 +41,10 @@ boolean connected(int p, int q) //connected操作
 1. 数据结构  
 长度为N的整数数组id[]；  p和q的id相等时为连接。
 2. 基本操作  
+```java
 void union(int p, int q) //将p的id设为q的id;  
 boolean connected(int p, int q) //检验p和q的id是否相等。
+```
 3. Java实现
 ```java
 public class QuickFindUF
@@ -84,7 +86,7 @@ void union(int p, int q) //将p的根节点设为q的根节点;
 boolean connected(int p, int q) //检验p和q的根节点是否相等。
 3. Java实现
 ```java
-public QuickUnionUF
+public class QuickUnionUF
 {
     private int[] id;
 
