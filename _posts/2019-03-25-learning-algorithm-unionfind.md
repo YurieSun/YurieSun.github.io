@@ -4,7 +4,7 @@ title: "算法笔记（一）"
 description: "学习资料：algorithm (Princeton University)"
 keywords: test
 category: Learning
-tags: [machine learning]
+tags: [algorithm]
 ---
 
 
