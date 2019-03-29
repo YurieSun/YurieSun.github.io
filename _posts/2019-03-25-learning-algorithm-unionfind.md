@@ -23,7 +23,7 @@ tags: [algorithm]
 find：检查两对象是否在同一连通集中；  
 union：将这两个对象所在的连通集替换为和并后的连通集。
 4. 数据结构  
-```bash
+```java
 UF(int N) //含N个对象的的初始化集合  
 void union(int p, int q) //union操作
 boolean connected(int p, int q) //connected操作
