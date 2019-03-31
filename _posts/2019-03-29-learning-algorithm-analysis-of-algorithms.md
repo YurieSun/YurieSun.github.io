@@ -82,9 +82,9 @@ public static void main(String[] args)
 2. 估计离散求和的项
 * 对离散求和的项进行积分，得到其高阶项。
 * 举例  
-$1+2+...+N$　　　　　$\sum\limits_{i=1}^N i$ ~ $\int_{x=1}^N x dx$ ~ $\frac{1}{2}N^2$　
-\\　
-$1^k+2^k+...+N^k$　　　　　$\sum\limits_{i=1}^N i^k$ ~ $\int_{x=1}^N x^k dx$ ~ $\frac{1}{k+1}N^{k+1}$  
+$1+2+...+N$　　　　　$\sum\limits_{i=1}^N i$ ~ $\int_{x=1}^N x dx$ ~ $\frac{1}{2}N^2$
+\\
+$1^k+2^k+...+N^k$　　　　　$\sum\limits_{i=1}^N i^k$ ~ $\int_{x=1}^N x^k dx$ ~ $\frac{1}{k+1}N^{k+1}$
 \\
 $1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{N}$　　　　　$\sum\limits_{i=1}^N \frac{1}{i}$ ~ $\int_{x=1}^N \frac{1}{x}dx=\ln N$
 \\
