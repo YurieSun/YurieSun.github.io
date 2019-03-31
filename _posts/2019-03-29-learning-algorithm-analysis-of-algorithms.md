@@ -82,14 +82,13 @@ public static void main(String[] args)
 2. 估计离散求和的项
 * 对离散求和的项进行积分，得到其高阶项。
 * 举例  
-$1+2+...+N$　　　　　$\sum\limits_{i=1}^N i ~ \int_{x=1}^N x dx ~ \frac{1}{2}N^2$　
+$1+2+...+N$　　　　　$\sum\limits_{i=1}^N i$ ~ $\int_{x=1}^N x dx$ ~ $\frac{1}{2}N^2$　
 　
-$1^k+2^k+...+N^k$　　　　　$\sum\limits_{i=1}^N i^k ~ \int_{x=1}^N x^k dx ~ \frac_{1}{k+1}N^{k+1}$  
+$1^k+2^k+...+N^k$　　　　　$\sum\limits_{i=1}^N i^k$ ~ $\int_{x=1}^N x^k dx$ ~ $\frac_{1}{k+1}N^{k+1}$  
 
+$1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{N}$　　　　　$\sum\limits_{i=1}^N \frac{1}{i}$ ~ $\int_{x=1}^N \frac{1}{x}dx=\ln N$
 
-$1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{N}$　　　　　$\sum|limits_{i=1}^N \frac{1}{i} ~ \int_{x=1}^N \frac{1}{x}dx=\ln N
-
-3-sum triple loop　　　　　$\sum\limits_{i=1}^N\sum\limits_{j=i}^N\sum\limits_{k=j}^N 1 ~ \ini_{x=1}^N\ini_{y=x}^N\ini_{z=y}^N dzdydx ~ \frac{1}{6}N^3$
+3-sum triple loop　　　　　$\sum\limits_{i=1}^N\sum\limits_{j=i}^N\sum\limits_{k=j}^N 1$ ~ $\int_{x=1}^N\int_{y=x}^N\int_{z=y}^N dzdydx$ ~ $\frac{1}{6}N^3$
 
 3. 总结  
 理论上，可以获得运行时间的准确数学模型，但在实际应用中，公式较复杂，因此采取简化模型，可快速得到大致运行时间。
