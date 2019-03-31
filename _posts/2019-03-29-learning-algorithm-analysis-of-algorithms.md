@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "算法笔记（一）"
+title: "算法笔记（二）"
 description: "学习资料：algorithm (Princeton University)"
 keywords: test
 category: Learning
@@ -61,9 +61,9 @@ public static void main(String[] args)
     double time = stopwatch.elapsedTime();
 }
 ```
-* 法一：运行实验可得时间T(N)与输入大小N的关系T(N) = a$N^b$，通过log-log图可获得系数a、b，近似为立方关系。  
+* 法一：运行实验可得时间T(N)与输入大小N的关系$T(N) = aN^b$，通过log-log图可获得系数a、b，近似为立方关系。  
 法二：成倍增加N的大小，并测得T(N)，得到时间的比值ratio，而随着持续计算，lg ratio会收敛于系数b，从而得到与时间的关系，再通过某一点得到a的值；可进行如下推导：  
-由T(N) = a$N^b$得lg T(N)=lg a+b lg N，则lg$\frac{T(2N)}{T(N)}$=b lg$\{2N}{N}$，即b=lg$\frac{T(2N)}{T(N)}$=lg ratio。
+由$T(N) = aN^b$得$\lgT(N)=\lga+b\lgN$，则$lg\frac{T(2N)}{T(N)}=b\lg\frac{2N}{N}$，即$b=\lg\frac{T(2N)}{T(N)}=\lg ratio$。
 4. 实验算法学 
 * 与系统无关的因素（决定了指数b的值）  
 算法、输入数据
@@ -73,8 +73,32 @@ public static void main(String[] args)
 系统：OS, network, other apps, ...
 
 ### Mathematical Models
+精确计算运行时间非常麻烦，因此可以进行简化。
+1. 简化方法
+* cost model  
+使用一些基本操作估算运行时间，如访问数组。
+* tlide notation  
+忽略低阶项。
+2. 估计离散求和的项
+* 对离散求和的项进行积分，得到其高阶项。
+* 举例  
+$1+2+...+N$　　　　　$\sum\limits_{i=1}^N i ~ \ini_{x=1}^N x dx ~ \frac{1}{2}N^2$　　
+$1^k+2^k+...+N^k$　　　　　$\sum\limits_{i=1}^N i^k ~ \ini_{x=1}^N x^k dx ~ \frac_{1}{k+1}N^{k+1}  
+$1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{N}$　　　　　$\sum|limits_{i=1}^N \frac{1}{i} ~ \ini_{x=1}^N \frac{1}{x}dx=\ln N  
+3-sum triple loop　　　　　$\sum\limits_{i=1}^N\sum\limits_{j=i}^N\sum\limits_{k=j}^N 1 ~ \ini_{x=1}^N\ini_{y=x}^N\ini_{z=y}^N dzdydx ~ \frac{1}{6}N^3$
+3. 总结  
+理论上，可以获得运行时间的准确数学模型，但在实际应用中，公式较复杂，因此采取简化模型，可快速得到大致运行时间。
 
 ### Order-of-Growth Classifications
+order of growth|name|description|example|$\frac{T{2N}}{T(N)}  
+:-: | :-:| :--: | :-: | :-: | :-:  
+1|constant|$a=b+c$|statement|add two numbers|1
+$log N$|logarithmic|divide in half|binary search|~ 1
+N|linear|loop|find the maximum|2
+$N log N$|linearithmic|divide and conquer|mergesort|~ 2
+$N^2$|quadratic|double loop|check all pairs|4
+$N^3$|cubic|triple loop|check all triples|8
+$2^N$|exponential|exhaustive search|check all subsets|$T(N)$
 
 ### Theory of Algorithms
 
