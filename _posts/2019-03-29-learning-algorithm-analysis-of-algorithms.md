@@ -94,16 +94,32 @@ $1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{N}$　　　　　$\sum\limits_{i=1}^N \
 理论上，可以获得运行时间的准确数学模型，但在实际应用中，公式较复杂，因此采取简化模型，可快速得到大致运行时间。
 
 ### Order-of-Growth Classifications
-|order of growth|name|description|example|$\frac{T{2N}}{T(N)}  
-|:-: | :-:| :--: | :-: | :-: | :-:  
-|1|constant|$a=b+c$|statement|add two numbers|1
-|$log N$|logarithmic|divide in half|binary search|~ 1
-|N|linear|loop|find the maximum|2
-|$N log N$|linearithmic|divide and conquer|mergesort|~ 2
-|$N^2$|quadratic|double loop|check all pairs|4
-|$N^3$|cubic|triple loop|check all triples|8
-|$2^N$|exponential|exhaustive search|check all subsets|$T(N)$
+
+|order of growth|name|description|example|$\frac{T{(2N)}}{T(N)}$|  
+|:-: | :-:| :--: | :-: | :-: | :-:|  
+|1|constant|$a=b+c$|statement|add two numbers|1|
+|$log N$|logarithmic|divide in half|binary search|~ 1|
+|N|linear|loop|find the maximum|2|
+|$N log N$|linearithmic|divide and conquer|mergesort|~ 2|
+|$N^2$|quadratic|double loop|check all pairs|4|
+|$N^3$|cubic|triple loop|check all triples|8|
+|$2^N$|exponential|exhaustive search|check all subsets|$T(N)$|
 
 ### Theory of Algorithms
+1. 分析类型
+* 最好情况：对应下界  
+由最简单输入决定，且是所有输入的一个目标。  
+* 最坏情况：对应上界  
+由最复杂输入决定，为所有输入提供一个保证。
+* 平均情况：任一输入时的期望花销  
+提供了预测性能的方法
+2. 算法理论中常用的记号  
+
+|notation|provides|example|shorthand for|used to|
+|:-:|:--:|:-:|:--:|:--:|
+|Big Theta|asymptotic order of growth|$\Theta(N^2)$|$\frac{1}{2}N^2$<br>$10N^2$<br>$5N^2+22N\log N+3N$<br>...|classify algorithms|
+|Big Oh|$\Theta(N^2)$ and smaller|$O(N^2)$|$10N^2$<br>$100N$<br>$22N\log N+3N$<br>...|develop upper bounds|
+Big Omega|$\Theta(N^2)$ and larger|$\Omega(N^2)$|$\frac{1}{2}N^2$<br>$N^5$<br>$N^3+22N\log N+3N$<br>...|develop lower bounds| 
 
 ### Memory
+不同的对象所占用的内存不同。
