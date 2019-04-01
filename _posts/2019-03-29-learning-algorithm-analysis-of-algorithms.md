@@ -97,7 +97,7 @@ $1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{N}$　　　　　$\sum\limits_{i=1}^N \
 
 |order of growth|name|description|example|$\frac{T{(2N)}}{T(N)}$|  
 |:-: | :-:| :--: | :-: | :-: | :-:|  
-|1|constant|$a=b+c$|statement|add two numbers|1|
+|1|constant|statement|add two numbers|1|
 |$log N$|logarithmic|divide in half|binary search|~ 1|
 |N|linear|loop|find the maximum|2|
 |$N log N$|linearithmic|divide and conquer|mergesort|~ 2|
