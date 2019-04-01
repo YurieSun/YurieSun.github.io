@@ -3,7 +3,7 @@ layout: post
 title: 算法笔记（三)
 description: "学习资料：algorithm (Princeton University)"
 keywords: test
-category: Leaning
+category: Learning
 tags: [algorithm]
 ---
 
@@ -56,6 +56,7 @@ public static void main(String[] args)
 ```
 3. Stack implementation
 * 链表实现
+
 ```java
 public class LinkedStackOfStrings()
 {
@@ -130,6 +131,7 @@ public String pop()
     s[N] = null;
     return item;
 }
+```
 
 ### Resizing Arrays
 
