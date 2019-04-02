@@ -32,7 +32,7 @@ tags: [algorithm]
 ### Stacks
 1. Stack API
 
-```java
+ ```java
 public class StackOfStrings
 {
     StackOfStrings();//创建空栈
@@ -48,7 +48,7 @@ public class StackOfStrings
 * 功能：从标准输入中读字符，若字符为“-”，从栈中取出字符并打印，其余情况均将字符放入栈中。
 * java实现
 
-```java
+ ```java
 public static void main(String[] args)
 {
     StackOfStrings stack = new StackOfStrings();
@@ -66,7 +66,7 @@ public static void main(String[] args)
 
 * 链表实现
 
-```java
+ ```java
 public class LinkedStackOfStrings()
 {
     private Node first = null;
@@ -101,7 +101,7 @@ public class LinkedStackOfStrings()
 
 * 数组实现
 
-```java
+ ``java
 public class FixedCapacityStackOfStrings()
 {
     private String[] s;
@@ -138,7 +138,7 @@ public class FixedCapacityStackOfStrings()
 * 游离
 当执行pop操作时，该位置还占有内存，因此，将pop操作改为：
 
-```java
+ ```java
 public String pop()
 {
     String item = s[--N];
@@ -158,7 +158,7 @@ public String pop()
 
 * 数组满时，创建一个长度为原来的两倍的新数组，并复制对象。
 
-```java
+ ```java
 public ResizingArraysStackOfStrings()
 {
     s = new String[1];
@@ -185,7 +185,7 @@ public void resize(int capacity)
 * 为什么不在数组$\frac{1}{2}$满时缩减数组长度？  
 在最坏情况下，当数组满时若不断交替执行push、pop操作，则每次操作均要改变数组长度，花销太大。（抖动问题）
 
-```java
+ ```java
 public String pop()
 {
     String item = s[--N];
