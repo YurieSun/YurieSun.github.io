@@ -123,7 +123,7 @@ tags: [algorithm]
     ```
 3. Stack considerations
     * 不足与溢出  
-    不足：当栈为空时执行pop操作；
+    不足：当栈为空时执行pop操作；  
     溢出：当栈满时执行push操作。
     * 以上实现允许空对象的插入
     * 游离  
