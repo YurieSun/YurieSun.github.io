@@ -99,7 +99,8 @@ tags: [algorithm]
         private String[] s;
         private int N = 0;
 
-        public FixedCapacityStackOfStrings(int capacity)//缺陷：需提前给定数组大小，会有溢出问题；且需要client提供容量，破坏了API
+        public FixedCapacityStackOfStrings(int capacity)
+        //缺陷：需提前给定数组大小，会有溢出问题；且需要client提供容量，破坏了API。
         {
             s = new String[capacity];
         }
@@ -121,11 +122,11 @@ tags: [algorithm]
     }
     ```
 3. Stack considerations
-    * 不足与溢出
+    * 不足与溢出  
     不足：当栈为空时执行pop操作；
     溢出：当栈满时执行push操作。
     * 以上实现允许空对象的插入
-    * 游离
+    * 游离  
     当执行pop操作时，该位置还占有内存，因此，将pop操作改为：
     ```java
     public String pop()
@@ -144,6 +145,7 @@ tags: [algorithm]
     * 因此需减少数组改变长度的频率。 
 2. 方法二
     * 数组满时，创建一个长度为原来的两倍的新数组，并复制对象。
+
     ```java
     public ResizingArraysStackOfStrings()
     {
@@ -165,10 +167,12 @@ tags: [algorithm]
         s = copy;
     }
     ```
+
     * 花销：插入N个对象的时间与N成正比，因仅在2的倍数时进行复制数组的操作，则平摊下来所需时间与N成正比。（平摊是一个有效策略）
     * 在数组$\frac{1}{4}$满时，将数组长度缩减为原来的一半，并复制对象。
     * 为什么不在数组$\frac{1}{2}$满时缩减数组长度？  
     在最坏情况下，当数组满时若不断交替执行push、pop操作，则每次操作均要改变数组长度，花销太大。（抖动问题）
+
     ```java
     public String pop()
     {
@@ -179,6 +183,7 @@ tags: [algorithm]
         return item;
     }
     ```
+
 3. 栈实现的对比：链表与可调整数组
     * 链表：在最坏情况下每个操作所需时间为常数，但需要额外的时间与空间来处理链表；
     * 可调整数组：每个操作平摊分析下所需时间为常数，但不需要更多的空间；
