@@ -190,8 +190,176 @@ tags: [algorithm]
     * 因此，若想保证每个操作都快速完成，选择链表；若想使用更少的总时间与空间，选择数组。
 
 ### Queues
+1. Queue API  
+```java
+public class QueueOfSreings
+{
+    QueueOfStrings();//创建空队列
+    void enqueue(Sttring item);//入队
+    String dequeue();//出队
+    boolean isEmpty();//检验是否为空
+    int size();
+}
+```
+2. Queue implementation
+
+* 链表实现
+
+```java
+public class LinkedQueueOfStrings
+{
+    private Node first, last;
+
+    public class node
+    {
+        String item;
+        Node next
+    }
+
+    public boolean isEmpty()
+    {
+        return first == null;
+    }
+
+    public void enqueue(String item)
+    {
+        Node oldlast = last;
+        last.item = item;
+        last.next = null;
+        if (isEmpty())
+            first = last;
+        else
+            oldlast.next = last;
+    }
+
+    public String dequeue()
+    {
+        String item = first.item;
+        first = first.next;
+        if (isEmpty())
+            last = null;
+        return item;
+    }
+}
+```
+
+* 数组实现
+
+```java
+public class ResizingArraysQueueOfStrings
+{
+    private String[] q;
+    private int N = 0, head = 0, tail = 0;
+    //N指数组内字符的实际长度，length属性得到的是数组的声明长度。
+
+    public ResizingArraysQueueOfStrings()
+    {
+        s = new String[1];
+    }
+
+    public boolean isEmpty()
+    {
+        return N == 0;
+    }
+
+    public void enqueue(String)
+    {
+        if(N == q.length)
+            resize(2 * q.length);
+        q[tail++] = item;
+        N++;
+    }
+
+    public String dequeue()
+    {
+        String item = q[head];
+        q[head++] = null;
+        N--;
+        if (N >0 && N == q.length/4)
+            resize (q.length/2);
+        return item
+    }
+
+    private void resize(int capacity)
+    {
+        String[] copy = new String[capacity];
+        for (int i = 0; i < N; i++)
+            copy[i] = q[i];
+        q = copy;
+    }
+}
+```
 
 ### Generics
+
+泛型是解决代码重用在不同数据类型的方法，可避免强制类型转换，且在编译时发现类型不匹配的问题而非运行时。
+
+链表的泛型实现如下：
+
+```java
+public class Stack<Item>
+{
+    private Node first = null;
+
+    private class Node
+    {
+        Item item;
+        Node next;
+    }
+
+
+    public boolean isEmpty()
+    {
+        return first == null;
+    }
+
+    public void push(Item item)
+    {
+        Node oldfirst = first;
+        first = new Node();
+        first.item = item;
+        first.next = oldfirst;
+    }
+
+    public Item pop()
+    {
+        Item item = first.item;
+        first = first.next;
+        return item;
+    }
+}
+```
+
+在java中不允许创建泛型数组，因此无法用数组实现泛型，则可以使用下面的强制类型转换，但不是一个好方法。该方法在编译时会产生warning，但不需要管，这是java不允许创建泛函数组所导致的。
+
+```java
+public class FixedCapacityStack<Item>
+{
+    private Item[] s;
+    private int N = 0;
+
+    public FixedCapacityStack(int capacity)
+    {
+        s = (Item[]) new Object[capacity];
+    }
+
+    public boolean isEmpty()
+    {
+        return N == 0;
+    }
+
+    public void push(Item item)
+    {
+        s[N++] = item;
+    }
+
+    public item pop()
+    {
+        item = s[--N];
+    }
+}
+```
+
 
 ### Iterations
 
