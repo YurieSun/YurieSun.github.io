@@ -373,6 +373,7 @@ public interface Iterable<Item>
 ```
 
 * Iterator interface 
+
 ```java
 public interface Iterator<Item>
 {
@@ -382,7 +383,7 @@ public interface Iterator<Item>
 }
 ```
 
-* 有迭代器时，“foreach”代码如下
+* 有迭代器时，“foreach”代码如下：
 
 ```java
 for (String s : stack)
@@ -497,3 +498,4 @@ public class Evaluate
         StdOut.println(vals.pop());
     }
 }
+```
