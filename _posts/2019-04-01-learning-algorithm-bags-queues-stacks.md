@@ -363,4 +363,137 @@ public class FixedCapacityStack<Item>
 
 ### Iterations
 
+* Iterable interface //返回Iterator的方法
+
+```java
+public interface Iterable<Item>
+{
+    Iterator<Item> iterator();
+}
+```
+
+* Iterator interface 
+```java
+public interface Iterator<Item>
+{
+    boolean hasNext();
+    Item next();
+    void remove(); //一般不用，存在调试隐患。
+}
+```
+
+* 有迭代器时，“foreach”代码如下
+
+```java
+for (String s : stack)
+    StdOut.println(s);
+```
+
+* 无迭代器时，等价代码如下：
+
+```java
+Iterator<String> i = stack.iterator();
+while (i.hasNext())
+{
+    String s = i.next();
+    StdOut.println(s);
+}
+```
+
+* Stack iterator
+
+```java
+//链表实现
+import java.util.Iterator;
+
+public class Stack<Item> implements Iterable<Item>
+{
+    ...
+
+    public Iterator<Item> iterator()
+    {
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<Item>
+    {
+        private Node current = first;
+
+        public boolean hasNext() {return current != null;}
+        public void remove() {// not supported}
+        public Item next()
+        {
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+}
+
+//数组实现
+import java.util.Iterator;
+
+public class Stack<Item> implements Iterable<Item>
+{
+    ...
+
+    public Iterator<Item> iterator()
+    {
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<Item>
+    {
+        private int i = N;
+
+        public boolean hasNext() {return i > 0;}
+        public void remove {// not supported}
+        public Item next() {return s[--i];}
+    }
+}
+```
+* Bag API
+
+这种数据结构只需插入元素，并不关心顺序。
+
+```java
+public class Bag<Item> implements Iterable<Item>
+
+    Bag() //创建空包
+    void add(Item x) //插入新元素
+    int size() //包中的元素个数
+    Iterable<Item> iterator() //包中元素的迭代
+```
+
 ### Applications
+
+* java的库中有实现栈、队列等数据结构的接口，但不推荐使用，因为里面有许多我们不需要用到的操作，且目前对库的理解不深，会导致错误及性能下降。
+
+* 栈的应用：java虚拟机、打字的撤销操作、网页的后退功能、函数调用
+
+* 栈的典型应用：中缀表达式
+
+```java
+public class Evaluate
+{
+    public static void main(String[] args)
+    {
+        Stack<String> ops = new Stack<String>();
+        Stack<Double> vals = new Stack<Double>();
+        while (!StdIn.isEmpty())
+        {
+            String s = StdIn.readString();
+            if (s.equals("("))  ;
+            else if (s.equals("+")) ops.push(s);
+            else if (s.equals("-")) ops.push(s);
+            else if (s.equals(")"))
+            {
+                String op = ops.pop();
+                if (op.equals("+")) vals.push(vals.pop() + vals.pop());
+                else if (op.equals("*")) vals.push(vals.pop() * vals.pop());
+            }
+            else vals.push(Double.parseDouble(s));
+        }
+        StdOut.println(vals.pop());
+    }
+}
