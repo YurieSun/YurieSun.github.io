@@ -23,7 +23,7 @@ C++: class-type functors
 C# :delegates  
 Python, Perl, ML, Javascript: first-class functions
 
-3. 回调的工作机制
+2. 回调的工作机制
 
 * client
 
@@ -84,17 +84,13 @@ public static void sort(Comparable[] a)
 }
 ```
 
-4. 全序关系（total order）
-
-全序关系应满足：
-
-* 反对称性：若$v\le w$且$w\le v$，则$v=w$。
-
-* 传递性：若$v\le w$且$w\le x，则$v\le x。
-
+3. 全序关系（total order）  
+全序关系应满足：  
+* 反对称性：若$v\le w$且$w\le v$，则$v=w$。  
+* 传递性：若$v\le w$且$w\le x，则$v\le x$。  
 * 完全性：v和w仅存在这三种关系，$v\le w$或$w\le v$或相等。
 
-5. less与exchange的实现
+4. less与exchange的实现
 
 * less implementation
 
@@ -147,7 +143,7 @@ public class Selection
 
 3. 数学分析
 
-* 选择排序需$(N-1)+(N-2)+...+1+0$ ~ $\frac{N^2}{2}次比较与N次交换。
+* 选择排序需$(N-1)+(N-2)+...+1+0$ ~ $\frac{N^2}{2}$次比较与N次交换。
 
 * 无论输入是什么样的（即使是有序的），仍然需要平方时间。
 
