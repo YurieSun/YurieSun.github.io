@@ -71,7 +71,7 @@ tags: [algorithm]
                 else break;
     }
     ```
-3. 全序关系（total order） 
+3. 全序关系（total order）  
     全序关系应满足：  
     * 反对称性：若$v\le w$且$w\le v$，则$v=w$。  
     * 传递性：若$v\le w$且$w\le x$，则$v\le x$。  
@@ -96,7 +96,7 @@ tags: [algorithm]
 
 ### Selection Sort
 1. 基本思想  
-将数组从左到右进行扫描，每次找出第i个元素右边的最小值，并与第i个交换，这样保证了第i个元素左边的均是以排序好的。
+将数组从左到右进行扫描，每次找出第i个元素右边的最小值，并与第i个交换，这样保证了第i个元素左边的均是已排序好的。
 2. java实现
     ```java
     public class Selection
@@ -193,7 +193,7 @@ public class Shell
 }
 ```
 5. 数学分析  
-最坏情况下，用$3x+1$的h数列的比较次数为$Oh(N^\frac{3}{2})$。
+最坏情况下，用$3x+1$的h数列的比较次数为$O(N^\frac{3}{2})$。
 6. 优点  
 数组不是非常大时，速度很快；仅需很简短的代码就可以提高速度。
 
@@ -235,11 +235,13 @@ public class StdRandom
     需谨慎处理，但难度不大。
 4. 判断逆时针角的实现  
 定义一个有向面积  
-$$2*Area(a, b, c) = \\left{vmatrix}
+$$2*Area(a, b, c) = \left|
+\begin{matrix}
 a_x&a_y&1\\
 b_x&b_y&1\\
 c_x&c_y&1
-\\end{vmatrix}=(b_x-a_x)(c_y-a_y)-(b_y-a_y)(c_x-a_x)$$
+\end{matrix}
+\right|=(b_x-a_x)(c_y-a_y)-(b_y-a_y)(c_x-a_x)$$  
 若有向面积大于0，则为逆时针角；若小于0，则为顺时针角；若等于0，则三点共线。
 5. java实现点类  
 ```java
