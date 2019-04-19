@@ -4,7 +4,7 @@ title: 算法笔记（五）
 description: "学习资料：algorithm (Princeton University)"
 keyword: test
 catogery: learning
-tag:　[algorithm]
+tag: [algorithm]
 ---
 
 ## Mergesort
@@ -161,6 +161,106 @@ tag:　[algorithm]
 
 ### Sorting Complexity
 
+
 ### Comparators
+1. Comparator接口
+    ```java
+    public interface Comparator<Key>
+        int compare(Key v, Key w)
+    ```
+2. 用于insertion sort的Comparator接口
+    ```java
+    publi static void sort(Object[] a, Comparator)
+    {
+        int N = a.length;
+        for (int i = 0; i < N; i++)
+            for (int j = i; j > 0 && less(comparator, a[i], a[i-1]); j--)
+                exch(a, j, j-1);
+    }
+
+    private static boolean less(Comparator c, Object v, Object w)
+    {
+        return c.compare(v, w) < 0;
+    }
+
+    private static void exch(Object[] a, int i, int j)
+    {
+        Object swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }
+    ```
+3. Comparator接口的java实现(距离)
+    定义一个内嵌的类来实现Comparator接口，并实现compare()方法。
+    ```java
+    public class Student
+    {
+        public static final Comparator<Student> BY_NAME = new ByName();
+        public static final Comparator<Student> BY_SECTION = new BySection();
+        private final String name;
+        private final int section;
+        ...
+
+        private static class ByName implements Comparator<Student>
+        {
+            public int compare(Student v, Student w)
+            {
+                return v.name.compareTo(w.name);
+            }
+        }
+
+        private static class BySection implements Comparator<Student>
+        {
+            public int compare(Student v, Student w)
+            {
+                return v.section - w.section;
+            }
+        }
+    }
+    ```
+4. 凸包中根据极角对点进行排列
+    * 计算极角可用atan2()计算，但使用三角函数的代价较大。
+    * 判断两点极角大小的基本思想  
+    若$q_1$在$p$上面且$q_2$在$p$下面，则$q_1$的极角小；  
+    若$q_1$在$p$下面且$q_2$在$p$上面，则$q_1$的极角大；  
+    若$q_1$和$q_2$同时在$p$的上面或下面，则根据ccw的返回结果判定哪个点的极角大。
+5. 判断极角的java实现
+    ```java
+    public class Point2D
+    {
+        public final Comparator<Point2D> POLAR_ORDER = new PolarOrder();
+        private final double x, y;
+        ...
+
+        private static int ccw(Point2D a, Point2D b, Point2D c)
+        { /* as before */}
+
+        private class PolarOrder implements Comparator<Point2D>
+        {
+            public int compare(Point2D q1, Point2D q2)
+            {
+                double dy1 = q1.y - y;
+                double dy2 = q2.y - y;
+
+                if (dy1 == 0 && dy2 == 0) {...}
+                else if (dy1 >= 0 && dy2 < 0) return -1;
+                else if (dy1 <= 0 && dy2 > 0) return +1;
+                else return -ccw(Point2D.this, q1, q2);
+            }
+        }
+    }
+    ```
 
 ### Stability
+1. 定义
+    一个具有稳定性的排序算法是指当排序指标相同时，将保留其相对位置。（即在第二次排序后，若键值相同，则会保持第一次排序的位置）
+2. 各排序算法的稳定性
+    * insertion sort  
+    稳定，因为具有相同值的项不会越过去。
+    * selection sort  
+    不稳定，长距离的移动会导致越过具有相同值的项。
+    * shellsort  
+    不稳定，同样具有长距离移动。
+    * mergesort  
+    稳定，当两项的值相等时，总是取左半边的值，就能保持稳定。
+3. 综上，mergesort是一个既快速又稳定的优秀算法。
