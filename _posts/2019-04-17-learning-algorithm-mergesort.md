@@ -74,11 +74,11 @@ tag: [algorithm]
     * 对于有$N$个元素的数组，mergesort最多有$N\lg N$次比较和$6N\lg N$次数组访问。
     * 比较次数$C(N)$和数组访问次数$A(N)$分别满足：  
     $\begin{cases}
-    C(N)\le C([\frac{N}{2}])+C([\frac{N}{2}])+N, & N>1\\
+    C(N)\le C([\frac{N}{2}])+C([\frac{N}{2}])+N, & N>1 \\
     C(N)=0, & N=1
     \end{cases}$  
     $\begin{cases}
-    A(N)\le A([\frac{N}{2}])+A([\frac{N}{2}])+6N, &N>1\\
+    A(N)\le A([\frac{N}{2}])+A([\frac{N}{2}])+6N, &N>1 \\
     A(N)=0, & N=1
     \end{cases}$
 7. 内存分析
@@ -126,7 +126,9 @@ tag: [algorithm]
             else aux[k] = a[i++];
         }
     }
+    ```
 
+    ```java
     private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi)
     {
         if (hi <= lo) return;
@@ -139,7 +141,7 @@ tag: [algorithm]
 
 ### Bottom-Up Mergesort
 1. 基本思想  
-    将数组从长度为1、2、4、8、16的小数组逐步牌组合并。
+    将数组从长度为1、2、4、8、16的小数组逐步排序合并。
 2. java实现
     ```java
     public class MergeBU
@@ -254,7 +256,7 @@ tag: [algorithm]
 
 ### Stability
 1. 定义  
-    一个具有稳定性的排序算法是指当排序指标相同时，将保留其相对位置。（即在第二次排序后，若键值相同，则会保持第一次排序的位置）
+    一个具有稳定性的排序算法是指当排序指标相同时，将保留其相对位置。（即在第二次排序后，若键值相同，则会保持第一次排序的位置。）
 2. 各排序算法的稳定性
     * insertion sort  
     稳定，因为具有相同值的项不会越过去。
