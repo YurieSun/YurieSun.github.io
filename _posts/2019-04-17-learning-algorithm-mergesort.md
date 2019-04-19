@@ -69,17 +69,18 @@ tag: [algorithm]
             sort(a, aux, 0, a.length - 1);
         }
     }
+    ```
 6. 数学分析
     * 对于有$N$个元素的数组，mergesort最多有$N\lg N$次比较和$6N\lg N$次数组访问。
     * 比较次数$C(N)$和数组访问次数$A(N)$分别满足：  
-    $\\begin{cases}
-    C(N)=\le C([\frac{N}{2}])+C([\frac{N}{2}])+N, & \mbox{if}N>1\\
-    C(1)=0$
-    \\end{cases}$  
-    $\\begin{cases}
-    A(N)\le A([\frac{N}{2}])+A([\frac{N}{2}])+6N, &\mbox{if}N>1\\
-    A(1)=0
-    \\end{cases}$
+    $\begin{cases}
+    C(N)\le C([\frac{N}{2}])+C([\frac{N}{2}])+N, & N>1\\
+    C(N)=0, & N=1
+    \end{cases}$  
+    $\begin{cases}
+    A(N)\le A([\frac{N}{2}])+A([\frac{N}{2}])+6N, &N>1\\
+    A(N)=0, & N=1
+    \end{cases}$
 7. 内存分析
     * mergesort所使用额外的空间与$N$成正比，因为在最后一次归并时，所用到的辅助数组aux[]的长度为$N$。
     * 不需要辅助数组的排序算法（in-place）所使用的额外的空间$\le c\log N$，如insertion sort、selection sort、shellsort。
@@ -112,7 +113,7 @@ tag: [algorithm]
         merge(a, aux, lo, mid, hi);
     }
     ```
-    * 执行merge函数时，删除将数组从a[]复制到aux[]的过程（仅节约时间，不节约空间）。此法要在sort(a)中初始化aux[]并将a[]复制到aux[]。
+    * 执行merge函数时，删除将数组从a[]复制到aux[]的过程（仅节约时间，不节约空间）。此法要在sort(a)中初始化aux[]并将a[]复制到aux[]。  
     ```java
     private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi)
     {
@@ -137,7 +138,7 @@ tag: [algorithm]
     ```
 
 ### Bottom-Up Mergesort
-1. 基本思想
+1. 基本思想  
     将数组从长度为1、2、4、8、16的小数组逐步牌组合并。
 2. java实现
     ```java
@@ -156,7 +157,7 @@ tag: [algorithm]
         }
     }
     ```
-3. 比较
+3. 比较  
     这是一种较简单且不需要递归的mergesort，但与上面所提到使用递归（top-down）的mergesort相比，速度减慢了10%。
 
 ### Sorting Complexity
@@ -252,7 +253,7 @@ tag: [algorithm]
     ```
 
 ### Stability
-1. 定义
+1. 定义  
     一个具有稳定性的排序算法是指当排序指标相同时，将保留其相对位置。（即在第二次排序后，若键值相同，则会保持第一次排序的位置）
 2. 各排序算法的稳定性
     * insertion sort  
