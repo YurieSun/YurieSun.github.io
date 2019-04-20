@@ -74,12 +74,12 @@ tag: [algorithm]
     * 对于有$N$个元素的数组，mergesort最多有$N\lg N$次比较和$6N\lg N$次数组访问。
     * 比较次数$C(N)$和数组访问次数$A(N)$分别满足：  
     $\begin{cases}
-    C(N)\le C([\frac{N}{2}])+C([\frac{N}{2}])+N, & N>1 \\
-    C(N)=0, & N=1
+    C(N)\le C([\frac{N}{2}])+C([\frac{N}{2}])+N & N>1 \\
+    C(N)=0 & N=1
     \end{cases}$  
     $\begin{cases}
-    A(N)\le A([\frac{N}{2}])+A([\frac{N}{2}])+6N, &N>1 \\
-    A(N)=0, & N=1
+    A(N)\le A([\frac{N}{2}])+A([\frac{N}{2}])+6N &N>1 \\
+    A(N)=0 & N=1
     \end{cases}$
 7. 内存分析
     * mergesort所使用额外的空间与$N$成正比，因为在最后一次归并时，所用到的辅助数组aux[]的长度为$N$。
@@ -127,7 +127,6 @@ tag: [algorithm]
         }
     }
     ```
-
     ```java
     private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi)
     {
@@ -163,7 +162,31 @@ tag: [algorithm]
     这是一种较简单且不需要递归的mergesort，但与上面所提到使用递归（top-down）的mergesort相比，速度减慢了10%。
 
 ### Sorting Complexity
-
+1. 计算复杂度  
+    计算复杂度是用来研究算法效率的，具体包括以下概念：  
+    计算模型：允许的操作；  
+    代价模型：操作的次数；  
+    上界：存在一些算法保证该问题的最大操作次数不会超过上界；  
+    下界：对于所有算法均不会低于下界；  
+    最佳算法：上界与下界相同，且该算法恰好达到上界（或下界）。
+2. 排序复杂度  
+    计算模型：决策树  
+    代价模型：比较的次数  
+    上界：mergesort的 ~ $N\lg N$  
+    下界与最佳算法：需探究  
+3. 决策树
+    比较a、b、c三个数的大小是很常见的决策树。
+4. 排序的下界
+    * 任何以比较为基础的排序算法，在最坏情况下至少要使用$\lg (N!)$ ~ $N\lg N$次比较。理由如下：  
+    将最坏情况表示成一个高为$h$的决策树，则该二叉树的第$h$最多有$2^h$个子节点，而含$N$个元素的数组至少有$N!$的不同排序，即最少有$N!$个子节点，因此有 $2^h\ge N!$，即$h\ge\lg (N!)$ ~ $N\lg N$。
+5. 总结  
+    * 由此可知，排序算法的上界和下界均为 ~ $N\lg N$，则mergesort为最佳算法。
+    * 在比较次数上，mergesort是最佳的，但在空间使用上并不是。
+6. 关于下界的一些说明
+    * 若算法已知下列信息，则$N\lg N$的下界可能不再成立：  
+    部分排序数列：比较次数取决于起始顺序，此时可能不再需要$N\lg N$次比较。如对一个有序数组，insertion sort只需$N-1$次比较。  
+    带有重复值：比较次数取决于重复值的分布，此时可能不再粗腰$N\lg N$次比较。如quicksort。  
+    数组值具有数字特征：如radix sorts。
 
 ### Comparators
 1. Comparator接口
