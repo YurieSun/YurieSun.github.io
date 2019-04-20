@@ -73,14 +73,14 @@ tag: [algorithm]
 6. 数学分析
     * 对于有$N$个元素的数组，mergesort最多有$N\lg N$次比较和$6N\lg N$次数组访问。
     * 比较次数$C(N)$和数组访问次数$A(N)$分别满足：  
-    $\begin{cases}
+    $$\begin{cases}
         C(N)\le C([\frac{N}{2}])+C([\frac{N}{2}])+N & N>1 \\
         C(N)=0 & N=1
-    \end{cases}$  
-    $\begin{cases}
+    \end{cases}$$  
+    $$\begin{cases}
         A(N)\le A([\frac{N}{2}])+A([\frac{N}{2}])+6N &N>1 \\
         A(N)=0 & N=1
-    \end{cases}$
+    \end{cases}$$
 7. 内存分析
     * mergesort所使用额外的空间与$N$成正比，因为在最后一次归并时，所用到的辅助数组aux[]的长度为$N$。
     * 不需要辅助数组的排序算法（in-place）所使用的额外的空间$\le c\log N$，如insertion sort、selection sort、shellsort。
