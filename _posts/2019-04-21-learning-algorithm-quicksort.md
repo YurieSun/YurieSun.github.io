@@ -8,7 +8,9 @@ tag: [algorithm]
 ---
 
 ## Quicksort
-1. 基本思想
+
+### Quicksort
+1. 基本思想  
     对数组进行洗牌；将数组分成两部分，使得对于某些j，a[j]是安书序排列的，即j的左边不会有比它大的，j的右边不会有比它小的；递归对每部分进行排序。
 2. partition的java实现
     ```java
@@ -125,10 +127,65 @@ tag: [algorithm]
     }
     ```
 
-### Quicksort
-
 ### Selection
+1. 问题描述  
+    给定一个长度为N的数组，找到其中第k小的数。
+2. 实现方法：quick-select  
+    利用quicksort的partition，使得a[j]左边没有比它大的元素，右边没有比它小的元素，即a[j]是in-place的。
+    ```java
+    public static Comparable select(Comparable[] a, int k)
+    {
+        StdRandom.shuffle(a);
+        int lo = 0, hi = a.length - 1;
+        while (hi >lo)
+        {
+            int j = partition(a, lo, hi);
+            if (j < k) lo = j + 1; 
+            else if (j > k) hi = j - 1;
+            else return a[k];
+        }
+        return a[k];
+    }
+3. 数学分析
+    * quick-select平均使用线性时间  
+    直观上，每次partition大概会在数组中间，则需要的比较次数为$N+\frac{N}{2}+\frac{N}{4}+...+1\sim2N$。  
+    与quicksort类似的公式分析可得  
+    $C_N=2N+2k\ln(\frac{N}{k})+2(N-k)\ln(\frac{N}{N-k})$  
+    当$k=\frac{N}{2}$时，$C_N$达到最大值$(2+2\ln2)N$，即最大花销为$(2+2\ln2)N$。
+    * 需要注意的是，在最坏情况下，quick-select需要$\sim \frac{1}{2}N^2$次比较，但随机洗牌能尽量避免最坏情况的出现。
+4. 理论分析
+    * 1973年提出一种在最坏情况下的运行时间为线性的算法，但是由于花销太大，并未在实际中使用。
+    * 因此，最坏情况下存在线性时间的算法，但仍需探索可实际运用的算法。而在这个算法提出之前，如果不需要将数组进行排序，quick-select是一个很好的选择。 
 
 ### Duplicate Keys
+1. 通常，带有重复项的数组都具有元素多、不同项数量少的特点。若使用mergesort，比较次数在$\frac{1}{2}N\lg N$和$N\lg N$之间；若使用quicksort，且不在相同项时停下，则会使用平方的比较次数，许多课本上和系统实现中扔存在这个问题。
+2. 三分法（3-way partiton）
+    * 基本思想  
+    将数组划分成三部分：在下标为lt和gt之间的元素和比较元素v相等，在lt左边的数比v小，在gt右边的数比v大。
+    * java实现
+    ```java
+    private static void sort(Comparable[] a, int lo, int hi)
+    {
+        if (hi <= lo) return;
+        int lt = lo, gt = hi;
+        Comparable v = a[lo];
+        int i = lo;
+        while (i <= gt)
+        {
+            int cmp = a[i].compareTo(v);
+            if (cmp < 0) exah(a, lt++, i++);
+            else if (cmp > 0) exch(a, i, gt--);
+            else i++;
+        }
+
+        sort(a, lo, lt - 1);
+        sort(a, gt + 1, hi);
+    } 
+    ```
+3. 下界
+    * 在最坏情况下，对于有$n$个不同元素的数组，其中第$i$个出现的次数为$x_i$，任何以比较为基础的排序算法至少需要的比较次数为$\lg(\frac{N!}{x_1!x_2!...x_n!})\sim-\sum\limits_{i=1}^{n}x_i\lg\frac{x_i}{N}$。  
+    当所有元素都不同时，上式结果为$N\lg N$；当所有元素都相同时，为线性。
+    * 3-way quicksort是entropy-optimal的，即无论相同元素的位置是怎样的，性能总是正比于下界。
+    * 随机洗牌的3-way quicksort可将运行时间从线性对数（$N\lg N$）减小到线性。
 
 ### System Sorts
