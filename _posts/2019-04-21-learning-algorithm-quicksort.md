@@ -190,7 +190,7 @@ tag: [algorithm]
     * 随机洗牌的3-way quicksort可将运行时间从线性对数（$N\lg N$）减小到线性。
 
 ### System Sorts
-1. java系统中有sort方法，只需调用即可。
+1. java系统中有sort方法，只需调用即可。  
     java中的sort对于基本数据类型采用quicksort，而对于对象采用mergesort。可能的原因是，对于基本类型，性能较为重要，而对于对象类型，mergesort所使用的额外空间并不是一个需要担心的问题。
     ```java
     import java.util.Arrays;
