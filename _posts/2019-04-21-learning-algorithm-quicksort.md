@@ -146,6 +146,7 @@ tag: [algorithm]
         }
         return a[k];
     }
+    ```
 3. 数学分析
     * quick-select平均使用线性时间  
     直观上，每次partition大概会在数组中间，则需要的比较次数为$N+\frac{N}{2}+\frac{N}{4}+...+1\sim2N$。  
@@ -158,7 +159,7 @@ tag: [algorithm]
     * 因此，最坏情况下存在线性时间的算法，但仍需探索可实际运用的算法。而在这个算法提出之前，如果不需要将数组进行排序，quick-select是一个很好的选择。 
 
 ### Duplicate Keys
-1. 通常，带有重复项的数组都具有元素多、不同项数量少的特点。若使用mergesort，比较次数在$\frac{1}{2}N\lg N$和$N\lg N$之间；若使用quicksort，且不在相同项时停下，则会使用平方的比较次数，许多课本上和系统实现中扔存在这个问题。
+1. 通常，带有重复项的数组都具有元素多、不同项数量少的特点。若使用mergesort，比较次数在$\frac{1}{2}N\lg N$和$N\lg N$之间；若使用quicksort，且不在相同项时停下，则会使用平方的比较次数，许多课本上和系统实现中仍存在这个问题。
 2. 三分法（3-way partiton）
     * 基本思想  
     将数组划分成三部分：在下标为lt和gt之间的元素和比较元素v相等，在lt左边的数比v小，在gt右边的数比v大。
@@ -189,3 +190,38 @@ tag: [algorithm]
     * 随机洗牌的3-way quicksort可将运行时间从线性对数（$N\lg N$）减小到线性。
 
 ### System Sorts
+1. java系统中有sort方法，只需调用即可。
+```java
+import java.util.Arrays;
+
+public class StringSort
+{
+    public static void main(String arg[])
+    {
+        String[] a = StdIn.readString());
+        Array.sort(a);
+        for (int i = 0; i < N; i++)
+            StdOut.println(a[i]);
+    }
+}
+```
+java中的sort对于基本数据类型采用quicksort，而对于对象采用mergesort。可能的原因是，对于基本类型，性能较为重要，而对于对象类型，mergesort所使用的额外空间并不是一个需要担心的问题。
+2. 设计系统中的排序
+    * 基本算法是quicksort，并加上小数组的insertion sort、3-way partition及选择比较元素上的优化方法。其中，对于小数组，采用中间位置的数作为比较值；对于中等数组，采用最左、中间、最右中的中间值最为比较值；对于大树组，采用Tukey's ninther方法。以上的排序算法以广泛运用于C、C++、Java 6中。
+    * Tukey's ninther方法  
+    先找到三个中间值，再选择这三个值的中间值作为比较值，相当于以9个数的中间作为比较值，更接近真正的划分值。这种方法每次最多需要12次比较。且比随机洗牌可以更好地划分数组，花销也较少。
+    * Java的sort方法是否solid？  
+    存在一个数组会使得溢出函数调用栈，从而使程序需要平方时间，这是由于没有随机洗牌造成的。因此，随机洗牌对于性能保证是非常重要的。
+3. 排序算法的选择
+    有许多的排序算法供我们选择，应该从我们对算法有哪些需求进行选择，如：是否稳定、是否含有相同项、是否需要性能保证等。
+4. 排序算法的总结  
+
+||in-place|stable|worst|average|best|remarks|
+|:-:|:-:|:-:|:-:|:-:|:-:|:--:|
+|selection|$\surd$||$\frac{N^2}{2}$|$\frac{N^2}{2}$|$\frac{N^2}{2}$|$N$ exchanges|
+|insertion|$\surd$|$\surd$|$\frac{N^2}{2}$|$\frac{N^2}{4}$|$N$|use for small $N$ or partially ordered|
+|shell|$\surd$||?|?|$N$|tight code, subquadratic|
+|merge||$\surd$|$N\lg N$|$N\lg N$|$N\lg N$|$N\lg N$ guarantee, stable|
+|quick|$\surd$||$\frac{N^2}{2}$|$2N\lg N$|$N\lg N$|$N\lg N$ probabilistic guarentee fastest in practice|
+|3-way quick|$\surd$||$\frac{N^2}{2}$|$2N\lg N$|$N$|improves quicksort in presence of duplicate keys|
+|???|$\surd$|$\surd$|$N\lg N$|$N\lg N$|$N$|holy sorting grail|
