@@ -191,20 +191,20 @@ tag: [algorithm]
 
 ### System Sorts
 1. java系统中有sort方法，只需调用即可。
-```java
-import java.util.Arrays;
+    ```java
+    import java.util.Arrays;
 
-public class StringSort
-{
-    public static void main(String arg[])
+    public class StringSort
     {
-        String[] a = StdIn.readString());
-        Array.sort(a);
-        for (int i = 0; i < N; i++)
-            StdOut.println(a[i]);
+        public static void main(String arg[])
+        {
+            String[] a = StdIn.readString());
+            Array.sort(a);
+            for (int i = 0; i < N; i++)
+                StdOut.println(a[i]);
+        }
     }
-}
-```
+    ```
 java中的sort对于基本数据类型采用quicksort，而对于对象采用mergesort。可能的原因是，对于基本类型，性能较为重要，而对于对象类型，mergesort所使用的额外空间并不是一个需要担心的问题。
 2. 设计系统中的排序
     * 基本算法是quicksort，并加上小数组的insertion sort、3-way partition及选择比较元素上的优化方法。其中，对于小数组，采用中间位置的数作为比较值；对于中等数组，采用最左、中间、最右中的中间值最为比较值；对于大树组，采用Tukey's ninther方法。以上的排序算法以广泛运用于C、C++、Java 6中。
