@@ -23,6 +23,7 @@ tag: [algorithm]
     boolean isEmpty() //查看是否为空
     Key max() //可选，返回最大元素
     int size() //可选，返回元素个数
+    ```
 3. priority queue的应用  
     * Event-driven simulation: customers in a line, colliding particles  
     * Numerical computation: reducing roundoff error
@@ -36,6 +37,7 @@ tag: [algorithm]
     * Spam filtering: Bayesian spam filter
 4. priority queue client举例  
     * 寻找$N$个元素中最大的$M$个，通常用于内存不足以存放$N$，仅能存放$M$个元素的情况。如在检测诈骗时，银行的转账记录仅保存转账金额最大的几笔。
+
     ```java
     MinPQ<Transaction> pq = new MinPQ<Transaction>();
 
@@ -98,7 +100,7 @@ tag: [algorithm]
     |goal|$\log N$|$\log N$|$\log N$|
 
 ### API and Elementqry Implementations
-1. 完全二叉树
+1. 完全二叉树  
     除最后一层外其余节点都是满的二叉树，称为完全二叉树。  
     性质：具有$N$个节点的完全二叉树的高度为$\lfloor\lg N\rfloor$，因为只有$N$为2的指数幂时，高度才会增加。
 2. 二叉堆的表示与性质
@@ -182,6 +184,7 @@ tag: [algorithm]
     }
     ```
 5. 优先队列不同实现的开销
+
     |implementation|insert|del max|max|
     |:-:|:-:|:-:|:-:|
     |unordered array|$1$|$N$|$N$|
@@ -190,6 +193,7 @@ tag: [algorithm]
     |d-ary heap|$\log_dN$|$d\log_dN$|$1$|
     |Fibonacci|$1$|$\log N$|$1$|
     |impossible|$1$|$1$|$1$|
+
 6. 二叉堆的一些考虑
     * 元素的不变性（immutability）  
     在上面的实现中，假定client不会改变已在优先队列中的元素。这并不是一个好的方法，最好是使用具有不变性的元素。
@@ -198,7 +202,7 @@ tag: [algorithm]
     * MinPQ的实现  
     将less()替换为greater()，并实现greater()。
     * 其余操作  
-    如删除任意元素、改变一个元素的优先级（可通过sink()和swim()实现）
+    如删除任意元素、改变一个元素的优先级（可通过sink()和swim()实现）。
 7. java中的immutability
     * 不可变的数据类型是指一旦该数据的值被指定后不能改变。
     * 不可变数据类型：String, Integer, Double, Color, Vector, Transaction, Point2D  
