@@ -8,6 +8,8 @@ tag: [algorithm]
 ---
 
 ## Priority Queues
+
+### API and Elementqry Implementations
 1. 不同数据结构的区别    
     Stack：删除最近加入的元素  
     Queue：删除第一个加入的元素  
@@ -99,7 +101,7 @@ tag: [algorithm]
     |ordered array|$N$|$1$|$1$|
     |goal|$\log N$|$\log N$|$\log N$|
 
-### API and Elementqry Implementations
+### Binary Heaps
 1. 完全二叉树  
     除最后一层外其余节点都是满的二叉树，称为完全二叉树。  
     性质：具有$N$个节点的完全二叉树的高度为$\lfloor\lg N\rfloor$，因为只有$N$为2的指数幂时，高度才会增加。
@@ -211,9 +213,57 @@ tag: [algorithm]
     * 优点：简化调试过程、存在恶意代码时更安全、简化同时编程过程、在优先队列或符号表中使用这种元素更安全。
     * 缺点：对于每个数据类型值必须创建新的对象。（瑕不掩瑜）
 
-### Binary Heaps
-
 ### Heapsort
+1. 基本思想  
+    将一个任意排列的数组，首先将其排列成max-heap，即根节点不会小于子节点的二叉树；再重复将根节点与最后一个节点交换位置，以放到正确的位置。
+2. heap construction  
+    通过bottom-up的方法实现，具体做法为，从最右的第一个父节点进行sink操作。
+    ```java
+    for (int k = N/2; k >= 1; k--)
+        sink(a, k, N);
+    ```
+3. sortdown
+    首先将根节点与最后一个节点交换位置，再对根节点进行sink操作。注意的是，此时不需将最后一个位置设为null，而是将该元素留在数组。
+    ```java
+    while (N > 1)
+    {
+        exch(a, 1, N--);
+        sink(a, 1, N);
+    }
+4. heapsort的java实现
+    ```java
+    public class Heap
+    {
+        public static void sort(Comparable[] a)
+        {
+            int N = a.length;
+            for (int k = N/2; k >= 1;k--)
+                sink(a, k, N);
+            while (N > 1)
+            {
+                exch(a, 1, N);
+                sink(a, 1, --N);
+            }
+        }
+
+    private static void sink(Comparable[] a, int k, int N)
+    { /* as before */ }
+    //less和exch要将从1开始改成从0开始
+    private static boolean less(Comparable[] a, int i, int j)
+    { /* as before */ }
+    private static void exch(Comparable[] a, int i, int j)
+    { /* as before */}        
+    }
+    ```
+5. 数学分析
+    * heap construction使用的比较和交换次数$\le2N$，heapsort使用的比较和交换次数$\le2N\le N$。
+    * heapsort是in-place的排序算法，且最坏情况为$N\lg N$。  
+    mergesort需要使用额外空间，虽然可以是in-place算法，但实际使用较复杂。  
+    quicksort在最坏情况为平方时间，虽然可以做到$N\lg N$，但实际使用也很复杂。
+    * 虽然heapsort在时间和空间上均为最优算法，然而实际应用上很少用到，主要是因为：  
+    内循环比quicksort要长；  
+    在目前缓存盛行的情况下，其表现并不好；  
+    不稳定。 
 
 ### Event-Driven simulation
 
