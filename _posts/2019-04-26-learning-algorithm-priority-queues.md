@@ -256,7 +256,7 @@ tag: [algorithm]
     }
     ```
 5. 数学分析
-    * heap construction使用的比较和交换次数$\le2N$，heapsort使用的比较和交换次数$\le2N\le N$。
+    * heap construction使用的比较和交换次数$\le2N$，heapsort使用的比较和交换次数$\le2N\lg N$。
     * heapsort是in-place的排序算法，且最坏情况为$N\lg N$。  
     mergesort需要使用额外空间，虽然可以是in-place算法，但实际使用较复杂。  
     quicksort在最坏情况为平方时间，虽然可以做到$N\lg N$，但实际使用也很复杂。
@@ -266,4 +266,6 @@ tag: [algorithm]
     不稳定。 
 
 ### Event-Driven simulation
+粒子随机碰撞模拟。
+
 
