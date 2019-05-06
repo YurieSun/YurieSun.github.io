@@ -10,7 +10,7 @@ tag: [algorithm]
 ## Symbol Tables
 
 ### API
-1. 数据结构
+1. 数据结构  
     是一个键-值对的抽象表达，基本操作有：插入一个含键的值，找出给定键的值。
 2. 基本API
     ```java
@@ -23,6 +23,7 @@ tag: [algorithm]
         boolean isEmpty() //是否为空
         int size() //返回键值对数量
         Iterable<Key> keys //符号表中的所有键值
+    ```
 3. 约定
     * 值是非空的（即不会插入不含值的键）;  
     若键不存在get()方法返回null;  
@@ -33,7 +34,8 @@ tag: [algorithm]
         public boolean contains(Key key)
         { return get(key) != null; }
         ```
-       容易实现delete()
+
+       容易实现delete()。
         ```java
         public coid delete(Key key)
         { put(key, null); }
@@ -108,6 +110,7 @@ tag: [algorithm]
         for (String s : st.keys())
             StdOut.println(s + " " + st.get(s));
     }
+    ```
 9. 计数器的实现
     ```java
     //读入一系列字符并将出现频率最高的单词打印出来
