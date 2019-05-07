@@ -33,8 +33,7 @@ tag: [algorithm]
         ```java
         public boolean contains(Key key)
         { return get(key) != null; }
-        ```
-
+        ```  
        容易实现delete()。
         ```java
         public coid delete(Key key)
@@ -138,5 +137,109 @@ tag: [algorithm]
     ```
 
 ### Elementary Implementations
+1. 链表的顺序搜索
+    * 数据结构  
+    维护未排序的键值对链表
+    * 基本操作  
+    search：扫描所有键直到找到  
+    insert：扫描所有键直到找到，若未找到则插入
+    * 需找到对search和insert均快速的实现方法。
+2. 在有序数组中进行二分查找
+    * 数据结构  
+    维护一个有序的键值对数组
+    * rank辅助函数  
+    找出有多少个键$<k$
+    * java实现
+    ```java
+    public Value get(Key key)
+    {
+        if (isEmpty()) return null;
+        int i = rank(key);
+        if (i < N && keys[i].compareTo(key) == 0) return vals[i];
+        else return null;
+    }
+
+    private int rank(Key key)
+    {
+        int lo = 0, hi = N - 1;
+        while (lo <= hi)
+        {
+            int mid = lo + (hi - lo) / 2;
+            int cmp = key.compareTo(keys[mid]);
+            if (cmp < 0) hi = mid - 1;
+            else if (cmp > 0) lo = mid + 1;
+            else return mid;
+        }
+        return lo;
+    }
+    ```
+    * 存在的问题  
+    每插入一个元素都需要将后面的元素后移，开销大。
+3. 符号表基本实现的总结
+    <table>
+    <tr>
+        <td rowspan="2">ST implementation</td>
+        <td colspan="2">worst-case cost<br>(after N inserts)</br></td>
+        <td colspan="2">average case<br>(after N random inserts)</br></td>
+        <td rowspan="2">ordered iteration?</td>
+        <td rowspan="2">key interface</td>
+    </tr>
+    <tr>
+        <td>search</td>
+        <td>insert</td>
+        <td>search hit</td>
+        <td>insert</td>
+    </tr>
+    <tr>
+        <td>sequential search<br>(unordered list)</br></td>
+        <td>N</td>
+        <td>N</td>
+        <td>N/2</td>
+        <td>N</td>
+        <td>no</td>
+        <td>equals()</td>
+    </tr>
+    <tr>
+        <td>binary search<br>(ordered array)</br></td>
+        <td>log N</td>
+        <td>N</td>
+        <td>log N</td>
+        <td>N/2</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    </table>
 
 ### Ordered Operations
+1. 有序符号表的API
+    ```java
+    public class ST<Key extends Comparable<Key>, Value>
+        ST() //创建有序符号表
+        void put(Key key, Value val) //插入键值对，当val为null时删除该键值对
+        Value get(Key key) //返回该键对应的值
+        void delete(Key key) //删除键值对
+        boolean contains(Key key) //是否有与该键配对的值
+        boolean isEmpty() //符号表是否为空
+        int size() //键值对数量
+        Key min() //最小的键
+        Key max() //最大的键
+        Key floor(Key key) //不大于该键的最大键
+        Key ceiling(Key key) //不小于该键的最小键
+        int rank(Key key) //比该键更小的键的数量
+        Key select(int k) //第k个键
+        void deleteMin() // 删除最小键
+        void deleteMax() //删除最大键
+        int size(Key lo, Key hi) //在[lo..hi]中键的个数
+        Iterable<Key> keys(Key lo, Key hi) //在[lo..hi]中排序后的键
+        Iterable<Key> keys() //表中所有的键，且已排序
+    ```
+2. 有序符号表的操作总结
+    ||sequential search|binary search|
+    |:-:|:-:|:-:|
+    |search|$N$|$\lg N$|
+    |insert/delete|$N$|$N$|
+    |min/max|$N$|$1$|
+    |floor/ceiling|$N$|$\lg N$|
+    |rank|$N$|$\lg N$|
+    |select|$N$|$1$|
+    |ordered iteration|$N\lg N$|$N$|
