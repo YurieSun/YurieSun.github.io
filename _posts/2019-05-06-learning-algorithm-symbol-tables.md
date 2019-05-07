@@ -158,7 +158,6 @@ tag: [algorithm]
         if (i < N && keys[i].compareTo(key) == 0) return vals[i];
         else return null;
     }
-
     private int rank(Key key)
     {
         int lo = 0, hi = N - 1;
@@ -179,8 +178,8 @@ tag: [algorithm]
     <table>
     <tr>
         <td rowspan="2">ST implementation</td>
-        <td colspan="2">worst-case cost<br>(after N inserts)</br></td>
-        <td colspan="2">average case<br>(after N random inserts)</br></td>
+        <td colspan="2">worst-case cost<br>(after N inserts)</td>
+        <td colspan="2">average case<br>(after N random inserts)</td>
         <td rowspan="2">ordered iteration?</td>
         <td rowspan="2">key interface</td>
     </tr>
@@ -191,7 +190,7 @@ tag: [algorithm]
         <td>insert</td>
     </tr>
     <tr>
-        <td>sequential search<br>(unordered list)</br></td>
+        <td>sequential search<br>(unordered list)</td>
         <td>N</td>
         <td>N</td>
         <td>N/2</td>
@@ -200,7 +199,7 @@ tag: [algorithm]
         <td>equals()</td>
     </tr>
     <tr>
-        <td>binary search<br>(ordered array)</br></td>
+        <td>binary search<br>(ordered array)</td>
         <td>log N</td>
         <td>N</td>
         <td>log N</td>
@@ -234,6 +233,7 @@ tag: [algorithm]
         Iterable<Key> keys() //表中所有的键，且已排序
     ```
 2. 有序符号表的操作总结
+
     ||sequential search|binary search|
     |:-:|:-:|:-:|
     |search|$N$|$\lg N$|
