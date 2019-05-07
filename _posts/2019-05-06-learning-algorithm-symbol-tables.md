@@ -2,9 +2,9 @@
 layout: post
 title: 算法笔记（八）
 description: "学习资料：algorithm (Princeton University)"
-keyword: test
-catogery: learning
-tag: [algorithm]
+keywords: test
+category: Learning
+tags: [algorithm]
 ---
 
 ## Symbol Tables
