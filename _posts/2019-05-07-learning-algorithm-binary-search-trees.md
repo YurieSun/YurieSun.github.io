@@ -151,7 +151,86 @@ tags: [algorithm]
         int cmp = key.compareTo(x.key);
         if (cmp == 0) return x;
         if (cmp < 0) return floor(x.left, key);
-        if (cmp > 0) 
+        Node t = floor(x.right, key);
+        if (t != null) return t;
+        else return x;
     }
+    ```
+    * ceiling同理
+3. rank/select
+    * rank：找到小于键$k$点的个数  
+    select：找到第$k$大的键
+    * 方法：给每个节点增加一个字段，用来存储以该节点为根的子树中的节点数（包括自己）；同时实现size()，来返回根节点的节点数。
+    * 计算节点数的java实现
+    ```java
+    private class Node
+    {
+        private Key key;
+        private Value val;
+        private Node left;
+        private Node right;
+        private int count; //增加节点计数的字段
+    }
+    public size()
+    { return size(root); } //返回根节点size
+    private int size(Node x)
+    {
+        if (x == null) return 0;
+        return x.count;
+    }
+    private Node put(Node x, Key key, Value val)
+    {
+        if (x == null) return new Node(key, val ,1);
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0) x.left = put(x.left, key, val);
+        else if (cmp > 0) x.right = put(x.right, key, val);
+        else x.val = val;
+        int count = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+    ```
+    * rank的java实现
+    ```java
+    public int rank(Key key)
+    { return rank(key, root); }
+    private int rank(Key key,Node x)
+    {
+        if (x == null) return 0;
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0) return rank(x.left);
+        else if (cmp > 0) return 1 + size(x.left) + rank(x.right);
+        else return size(x.left);
+    }
+    ```
+4. BST的顺序遍历
+    ```java
+    public Iterable<Key> keys()
+    {
+        Queue<Key> q = new Queue<Key>();
+        inorder(root, q);
+        return q;
+    }
+    private void inorder(Node x, Queue<Key q)
+    {
+        if (x == null) return;
+        inorder(x.left, q);
+        q.enqueue(x.key);
+        inorder(x.right, q);
+    }
+    ```
+5. 有序符号表的操作总结
+
+||sequential search|binary search|BST|
+|:-:|:-:|:-:|:-:|
+|search|$N$|$\lg N$|$h$|
+|insert|$N$|$N$|$h$|
+|min/max|$N$|$1$|$h$|
+|floor/ceiling|$N$|$\lg N$|$h$|
+|rank|$N$|$\lg N$|$h$|
+|select|$N$|$1$|$h$|
+|ordered iteration|$N\lg N$|$N$|$N$|
+
+* 当元素时随机插入时，BST的高度$h$与$\log N$成正比。
 
 ### Deletion
+1. 
