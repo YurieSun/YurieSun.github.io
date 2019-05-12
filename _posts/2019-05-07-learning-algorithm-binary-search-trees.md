@@ -125,7 +125,7 @@ tags: [algorithm]
     * 为什么不通过随机洗牌来保证search/insert在最坏情况下为$4.311\ln N$？
 
 
-### Ordered operations
+### Ordered Operations
 1. min/max
     * min：找到最小元素  
     max：找到最大元素  
@@ -233,4 +233,104 @@ tags: [algorithm]
 * 当元素时随机插入时，BST的高度$h$与$\log N$成正比。
 
 ### Deletion
-1. 
+1. 简单粗暴的删除
+    * 将删除的键设为null，仍留在树中。
+    * 花销：将曾插入BST的键值对数目记为$N'$，若随机插入键，则insert、search、delete花销均为$\sim2\ln N$。
+    * 缺点：当键值对数目很大或者删除操作很频繁时，这种方法会占用过多内存。
+2. 删除最小值
+    * 往左边搜索直到找到没有左子树的节点，用该节点的右子树替代该节点，并更新各节点的count。
+    * java实现
+    ```java
+    public void deleteMin()
+    { root = deleteMin(root); }
+    private Node deleteMin(Node x)
+    {
+        if (x.left = null) return x.right;
+        x.left = deleteMin(x.left);
+        x.count = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+    ```
+3. Hibbard deletion
+    * case 1：删除的节点没有子树，则直接将该节点设为null。  
+    case 2：删除的节点只有左子树或右子树，则用该节点的子树替代该节点。  
+    case 3：删除的节点 x 既有左子树又有右子树，则先在 x 的右子树中往左边找到没有左子树的节点 t （该节点就是用来替代被删节点的，也就是右子树的最小值），然后删除 t ，但不回收，并将 t 放在 x 的位置。
+    * java实现
+    ```java
+    public void delete(Key, key)
+    { root = delete(root, key); }
+    private Node delete(Node x, Key key)
+    {
+        if (x == null) return null;
+        int cmp = key.compareTo(x.key);
+        // 找到删除键的位置
+        if (cmp < 0) x.left = delete(x.left, key);
+        else if (cmp > 0) x.right = delete(x.right, key);
+        // 找到后的操作
+        else
+        {
+            if (x.right == null) return x.left;
+            else if (x.left == null) return x.right;
+
+            Node t = x;
+            x= min(t.right);
+            x.right = deleteMin(t.right);
+            x.left = t.left;
+        }
+        x.count = 1 + size(x.left) + size(x.right);
+        return x;
+    }
+    ```
+5. ST实现的总结
+    <table>
+    <tr>
+        <td rowspan="2">ST implementation</td>
+        <td colspan="3">worst-case cost<br>(after N inserts)</td>
+        <td colspan="3">average case<br>(after N random inserts)</td>
+        <td rowspan="2">ordered ops?</td>
+        <td rowspan="2">operations on keys</td>
+    </tr>
+    <tr>
+        <td>search</td>
+        <td>insert</td>
+        <td>delete</td>
+        <td>search hit</td>
+        <td>insert</td>
+        <td>delete</td>
+    </tr>
+    <tr>
+        <td>sequential search<br>(linked list)</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N/2</td>
+        <td>N</td>
+        <td>N/2</td>
+        <td>no</td>
+        <td>equals()</td>
+    </tr>
+    <tr>
+        <td>binary search<br>(ordered array)</td>
+        <td>lg N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>lg N</td>
+        <td>N/2</td>
+        <td>N/2</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    <tr>
+        <td>BST</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>1.39 lg N</td>
+        <td>1.39 lg N</td>
+        <td>sqrt(N)</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    </table>
+
+    * 当存在删除操作时，BST在平均情况下的search/insert操作也会变成$\sqrt{N}$。
