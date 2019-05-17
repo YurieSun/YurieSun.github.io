@@ -182,7 +182,6 @@ tags: [algorithm]
         if (cmp < 0) h.left = put(h.left, key, val);
         else if (cmp > 0) h.right = put(h.right, key, val);
         else h.val = val;
-
         //插入之后进行调整，以下判断不可调整顺序
         if (isRed(h.right) && !isRed(h.left)) rotateLeft(h);
         if (isRed(h.left) && isRed(h.left.left)) rotateRight(h);
@@ -256,7 +255,7 @@ tags: [algorithm]
         <td>compareTo()</td>
     </tr>
     <tr>
-        <td>red-black tree</td>
+        <td>red-black BST</td>
         <td>2 lg N</td>
         <td>2 lg N</td>
         <td>2 lg N</td>
@@ -268,6 +267,25 @@ tags: [algorithm]
     </tr>
     </table>
 
-    * red-black tree平均情况下的操作中的具体系数是不知道的，但非常接近1。
+    * red-black BST平均情况下的操作中的具体系数是不知道的，但非常接近1。
 
 ### B-Trees
+1. 文件系统模型
+    * 在文件系统中，找到第一页所花的时间要比在某一页中找数据多，因此，需要实现能够高效地找到第一页从而找到数据的算法。
+2. B-trees
+    * 与这是2-3 tree类似。但在B-tree中，假设每个节点可存放的数目为$M$，根节点最少有2个键，其余节点最少有$\frac{M}{2}$个键。最底层节点（即external nodes）存放的是从客户端接收的键，其余上层节点（即internal nodes）存放的是每个子节点的最小键，从而进行搜索。  
+    * search：从根节点开始，逐层向下，直到在external nodes中找到对应的键。
+    * insert：从根节点开始逐层向下，自external nodes中找到该节点所在位置，并插入。若某节点存满，则逐层向上进行分裂。
+3. B-trees的平衡性
+    * 设每个节点可存放数目为$M$，键的总数目为$N$，则每次search或insert所需要花费仅在$\log_{M-1}N$和$\log_{\frac{M}{2}}N$之间。
+4. balanced trees的应用
+    * red-black trees广泛应用于 系统符号表中
+        * Java: java.util.TreeMap, java.util.TreeSet
+        * C++ STL: map, multimap, multiset
+        * Linux kernel: completely fair scheduler, linux/rbtree.h
+        * Emacs: conservative stack scaning
+    * B tree有许多变种，如B+ tree、B* tree、B# tree，他们广泛应用于文件系统和数据库中。
+        * Windows: NTFS
+        * Mac: HFS, HFS+
+        * Linux: ReiserFS, XFS, Ext3FS, JFS
+        * Databases: ORACLE, DB2, INGRES, SQL, PostgreSQL
