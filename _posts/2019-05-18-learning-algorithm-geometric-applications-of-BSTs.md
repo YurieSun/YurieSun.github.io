@@ -42,9 +42,16 @@ tags: [algorithm]
     |unordered list|$1$|$N$|$N$|
     |ordered array|$N$|$\log N$|$R+\log N$|
     |BST|$\log N$|$\log N$|$R+\log N$|
+
     其中，$N$表示键的总个数，$R$表示在范围内的键的个数。
 
 ### Line Segment Intersection
+1. 问题描述
+    给定$N$条水平或垂直的线段，找到所有交点。  
+    若采用最简单的方法，需要平方时间。
+2. sweep-line算法
+    * 基本思想：用一条垂直线段从左向右扫描，若碰到水平线段左端点，将其y坐标插入BST；若碰到水平线段右端点，将其y坐标从BST删去；若碰到垂直线段，则寻找在该线段的y坐标范围内有多少个点，即range search。因此将2d问题退化成1d的问题，可直接使用上一节的算法。
+    * 若在$N$个正交线段中找到所有$R$个交点，该算法所需时间与$R+N\log N$成正比。
 
 ### Kd trees
 
