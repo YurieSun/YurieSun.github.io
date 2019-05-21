@@ -118,6 +118,7 @@ tags: [algorithm]
         <td>N</td>
         <td>1.39 lg N</td>
         <td>1.39 lg N</td>
+        <td>yes</td>
         <td>compareTo()</td>
     </tr>
     </table>
