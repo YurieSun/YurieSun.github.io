@@ -123,14 +123,15 @@ tags: [algorithm]
         ```
         * 若子树中含有相交区间，这种方法一定能找到其中一个。
 4. 使用red-black BST实现来保证性能
-    |operation|brute|interval search tree|best in theory|
-    |:-:|:-:|:-:|:-:|
-    |insert interval|$1$|$\log N$|$\log N$|
-    |find interval|$N$|$\log N$|$\log N$|
-    |delete|$N$|$\log N$|$\log N$|
-    |find any one interval that intersects (lo, hi)|$N$|$\log N$|$\log N$|
-    |find all intervals that intersects (lo, hi)|$N$|$R\log N$|$R+\log N$|
-    
+
+|operation|brute|interval search tree|best in theory|
+|:-:|:-:|:-:|:-:|
+|insert interval|$1$|$\log N$|$\log N$|
+|find interval|$N$|$\log N$|$\log N$|
+|delete|$N$|$\log N$|$\log N$|
+|find any one interval that intersects (lo, hi)|$N$|$\log N$|$\log N$|
+|find all intervals that intersects (lo, hi)|$N$|$R\log N$|$R+\log N$|
+
 ### Rectangle Intersection
 1. 问题描述
     * 找出$N$个矩形中所有相交的矩形（假设任意矩形的x坐标与y坐标均不相同）。若逐一检查所有矩形，需要平方时间。
@@ -141,10 +142,10 @@ tags: [algorithm]
     * 这个算法将2d正交矩形相交问题简化为了1d interval search。
 3. BSTs在几何中的应用总结
 
-    |problem|solution|
-    |:-:|:-:|
-    |1d range search|BST|
-    |2d orthogonal line segment intersection|sweep line algorithm|
-    |kd range search|kd tree|
-    |1d interval search|interval search tree|
-    2d orthogonal rectangle intersection|sweep line reduces to 1d interval search|
+|problem|solution|
+|:-:|:-:|
+|1d range search|BST|
+|2d orthogonal line segment intersection|sweep line algorithm|
+|kd range search|kd tree|
+|1d interval search|interval search tree|
+2d orthogonal rectangle intersection|sweep line reduces to 1d interval search|
