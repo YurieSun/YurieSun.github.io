@@ -123,7 +123,6 @@ tags: [algorithm]
         ```
         * 若子树中含有相交区间，这种方法一定能找到其中一个。
 4. 使用red-black BST实现来保证性能
-
     |operation|brute|interval search tree|best in theory|
     |:-:|:-:|:-:|:-:|
     |insert interval|$1$|$\log N$|$\log N$|
