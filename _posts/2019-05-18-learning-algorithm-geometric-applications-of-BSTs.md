@@ -101,9 +101,51 @@ tags: [algorithm]
         void delete(Key lo, Key hi) //删除给定区间
         Iterable<Value> intersects(Key lo, Key hi) //返回所有与给定区间相交的区间
     ```
-3. interval search trees的创建
-    * BST中每个节点储存的一个区间(lo, hi)
-    * 使用左端点作为键，在每个节点储存以该节点为根节点的所有子树中的最大端点值。
-4. insertion
+3. interval search trees
+    * creation
+        * BST中每个节点储存的一个区间(lo, hi)
+        * 使用左端点作为键，在每个节点储存以该节点为根节点的所有子树中的最大端点值。
+    * insertion：插入区间(lo, hi)
+        * 将lo作为键，并更新路径上的每个节点的最大值。
+    * intersection：找到一个与区间(lo, hi)相交的区间
+        * 若节点上的区间有交集，则返回；否则，若左子树为空，搜索右子树；否则，若左子树的最大值小于lo，搜索右子树；否则，搜索左子树。
+        * 实现
+        ```java
+        Node x = root;
+        while(x != null)
+        {
+            if (x.interval.intersect(lo, hi)) return x.interval;
+            else if (x.left == null) x = x.right;
+            else if (x.left.max < lo) x = x.right;
+            else x = x.left;
+        }
+        return null;
+        ```
+        * 若子树中含有相交区间，这种方法一定能找到其中一个。
+4. 使用red-black BST实现来保证性能
 
+    |operation|brute|interval search tree|best in theory|
+    |:-:|:-:|:-:|:-:|
+    |insert interval|$1$|$\log N$|$\log N$|
+    |find interval|$N$|$\log N$|$\log N$|
+    |delete|$N$|$\log N$|$\log N$|
+    |find any one interval that intersects (lo, hi)|$N$|$\log N$|$\log N$|
+    |find all intervals that intersects (lo, hi)|$N$|$R\log N$|$R+\log N$|
+    
 ### Rectangle Intersection
+1. 问题描述
+    * 找出$N$个矩形中所有相交的矩形（假设任意矩形的x坐标与y坐标均不相同）。若逐一检查所有矩形，需要平方时间。
+    * 微型处理器的设计检验需要用到解决这个几何问题的方法。
+2. sweep-line algorithm
+    * 使用垂直线从左向右扫描，若碰到左端点，对矩形的y坐标进行interval search，并将该interval插入；若碰到右端点，则删除该interval。
+    * 若在$N$个矩形中有$R$个矩形是橡胶的，那么这个算法所需时间与$N\log N+R\log N$成正比。
+    * 这个算法将2d正交矩形相交问题简化为了1d interval search。
+3. BSTs在几何中的应用总结
+
+    |problem|solution|
+    |:-:|:-:|
+    |1d range search|BST|
+    |2d orthogonal line segment intersection|sweep line algorithm|
+    |kd range search|kd tree|
+    |1d interval search|interval search tree|
+    2d orthogonal rectangle intersection|sweep line reduces to 1d interval search|
