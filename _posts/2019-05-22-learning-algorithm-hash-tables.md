@@ -150,7 +150,128 @@ tags: [algorithm]
     * load balancing：在$M$次操作后，最多元素的索引应至多有$\Theta(\log M/\log\log M)$个元素。
 
 ### Seperate Chaining
+1. 哈希冲突
+    * 指两个不同的键经过hashing后得到相同的索引。
+    * birthday problem表明，除非具有巨大的内存，否则难以避免冲突问题。
+    * coupon collector + load balancing表明，冲突时均匀分布的。
+2. separate-chaining synbol table
+    * 采用一个大小为$M$的数组来表示$N$个链表（其中$M<N$）。
+        * hash：将键映射为从$0$至$M-1$的整数$i$。
+        * insert：将其插入到第$i$个链表的开头。
+        * search：仅需搜索第$i$个链表。
+    * java实现
+    ```java
+    public class SeparateChainingHash<Key, Value>
+    {
+        private int M = 97; //链表数量
+        private Node[] st = new Node[M]; // 创建数组
+        private static class Node
+        {
+            private Object key;
+            private Object val;
+            private Node next;
+            // java中没有泛型的数组，因此声明为object类型
+            ...
+        }
+        private int hash(Key key)
+        { return (key.hashCode() & 0x7ffffff) % M; }
+        public Value get(Key key)
+        {
+            int i = hash(key);
+            for (Node x = st[i]; x != null; x = x.next)
+                if (key.equals(x.key)) return (Value) x.val;
+            return null;
+        }
+        public void put(Key key)
+        {
+            int i = hash(key);
+            for (Node x = st[i]; x != null; x = x.next)
+                if (key.equals(x.key)) { x.val = val; return; }
+            st[i] = new Node(key, val, st[i]);
+        }
+    }
+    ```
+    * 数学分析
+    * resizing
+        * 目标：使得平均长度$\frac{N}{M}$是一个常数
+        * 方法：当$\frac{N}{M}\ge 8$将数组大小$M$增大一倍；当$\frac{N}{M}\le 2$是将数组大小$M$缩小一半；当resizing时需要将所有键重新hash。
+3. ST实现的总结
+    <table>
+    <tr>
+        <td rowspan="2">implementation</td>
+        <td colspan="3">guarantee</td>
+        <td colspan="3">average case</td>
+        <td rowspan="2">ordered ops?</td>
+        <td rowspan="2">key interface</td>
+    </tr>
+    <tr>
+        <td>search</td>
+        <td>insert</td>
+        <td>delete</td>
+        <td>search hit</td>
+        <td>insert</td>
+        <td>delete</td>
+    </tr>
+    <tr>
+        <td>sequential search<br>(unordered list)</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N/2</td>
+        <td>N</td>
+        <td>N/2</td>
+        <td>no</td>
+        <td>equals()</td>
+    </tr>
+    <tr>
+        <td>binary search<br>(ordered array)</td>
+        <td>lg N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>lg N</td>
+        <td>N/2</td>
+        <td>N/2</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    <tr>
+        <td>BST</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>1.39 lg N</td>
+        <td>1.39 lg N</td>
+        <td>sqrt(N)</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    <tr>
+        <td>red-black BST</td>
+        <td>2 lg N</td>
+        <td>2 lg N</td>
+        <td>2 lg N</td>
+        <td>1.0 lg N</td>
+        <td>1.0 lg N</td>
+        <td>1.0 lg N</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    <tr>
+        <td>separate chaining</td>
+        <td>lg N</td>
+        <td>lg N</td>
+        <td>lg N</td>
+        <td>3-5</td>
+        <td>3-5</td>
+        <td>3-5</td>
+        <td>no</td>
+        <td>equals()<br>hashCode()</td>
+    </tr>
+    </table>
+
+    * 其中separate chaining的性能是建立在均匀性假设的条件上。当键比较少且不需要ordered ops时，使用这种方法效率较高。
 
 ### Linear Probing
+1. 
 
 ### Context
