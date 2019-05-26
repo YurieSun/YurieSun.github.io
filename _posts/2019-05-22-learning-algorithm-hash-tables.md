@@ -272,6 +272,138 @@ tags: [algorithm]
     * 其中separate chaining的性能是建立在均匀性假设的条件上。当键比较少且不需要ordered ops时，使用这种方法效率较高。
 
 ### Linear Probing
-1. 
+1. 基本思想
+    * hash：将键映射成从$0$至$M-1$的整数$i$。
+    * insert：若数组中的第$i$个位置为空，则放入；若不为空，则依次尝试$i+1$、$i+2$…
+    * search：对于给定键，先映射成$i$，在数组中寻找第$i$个位置，若相等，则找到；若不相等，则依次尝试$i+1$、$i+2$…直到碰到空位，说明数组中没有该元素。
+    * 注意：数组大小$M$必须要比键值对数量$N$大，且最好使用resizing以充分利用空间。
+2. java实现
+    ```java
+    public class LinearProbingHashST<Key, Value>
+    {
+        private int M = 30001;
+        private Value[] vals = (Value[]) new Object[M];
+        private Key[] keys = (Keys[]) new Object[M];
+        private int hash(Key key)
+        { /* as before */ }
+        private Value get(Key key)
+        {
+            for (i = hash(key); key[i] != null; i = (i+1) % M )
+            // i的递增方式使得当元素到达数组末尾仍无空位时，可移动到开头的第一个位置，并继续往后移动寻找空位。
+                if (key.equals(keys[i]))
+                    return vals[i];
+            return null;
+        }
+        public void put(Key key, Value val)
+        {
+            int i;
+            for (i = hash(key); keys[i] != null; i = (i+1) % M)
+                if (keys[i].equals(key))
+                    break;
+            keys[i] = key;
+            vals[i] = val;
+        }
+    }
+    ```
+3. Knuth's parking problem
+    * 模型  
+    车到达一个含$M$个车位的单行道，每辆车想要的车位为一个随机数$i$，若$i$非空，则依次尝试$i+1$、$i+2$...
+    * 分析  
+    每辆车的平均寻找次数是多少？  
+    half-full：若开始有$\frac{M}{2}$辆车，则平均寻找次数为$\sim\frac{3}{2}$。
+    full：若开始有$M$辆车，则平均寻找次数为$\sim\sqrt{\frac{\pi M}{8}}$。
+4. 数学分析
+    * 在均匀性假设下，在一个数量为$M$、含$N=\alpha M$个键的linear probing哈希表中，平均寻找次数为：  
+    search hit: $\sim \frac{1}{2}(1+\frac{1}{1-\alpha})$  
+    search miss/insert: $\sim\frac{1}{2}(1+\frac{1}{{1-\alpha}^2})$
+    * 参数$M$的选择：若$M$太大，则有很多空位，浪费储存空间；若$M$太小，则搜索时间急剧增加。因此，常选择$\alpha=\frac{N}{M}\sim\frac{1}{2}$，这样的话，search hit的平均次数约为$\frac{3}{2}$，search miss的平均次数约为$\frac{5}{2}$。
+5. resizing
+    为使得平均长度$\frac{N}{M}\le\frac{1}{2}$，当$\frac{N}{M}\ge\frac{1}{2}$时，数组大小$M$增加一倍；当$\frac{N}{M}\le\frac{1}{8}$时，数组大小$M$减小一半。
+6. ST实现的总结
+    <table>
+    <tr>
+        <td rowspan="2">implementation</td>
+        <td colspan="3">guarantee</td>
+        <td colspan="3">average case</td>
+        <td rowspan="2">ordered ops?</td>
+        <td rowspan="2">key interface</td>
+    </tr>
+    <tr>
+        <td>search</td>
+        <td>insert</td>
+        <td>delete</td>
+        <td>search hit</td>
+        <td>insert</td>
+        <td>delete</td>
+    </tr>
+    <tr>
+        <td>sequential search<br>(unordered list)</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N/2</td>
+        <td>N</td>
+        <td>N/2</td>
+        <td>no</td>
+        <td>equals()</td>
+    </tr>
+    <tr>
+        <td>binary search<br>(ordered array)</td>
+        <td>lg N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>lg N</td>
+        <td>N/2</td>
+        <td>N/2</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    <tr>
+        <td>BST</td>
+        <td>N</td>
+        <td>N</td>
+        <td>N</td>
+        <td>1.39 lg N</td>
+        <td>1.39 lg N</td>
+        <td>sqrt(N)</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    <tr>
+        <td>red-black BST</td>
+        <td>2 lg N</td>
+        <td>2 lg N</td>
+        <td>2 lg N</td>
+        <td>1.0 lg N</td>
+        <td>1.0 lg N</td>
+        <td>1.0 lg N</td>
+        <td>yes</td>
+        <td>compareTo()</td>
+    </tr>
+    <tr>
+        <td>separate chaining</td>
+        <td>lg N</td>
+        <td>lg N</td>
+        <td>lg N</td>
+        <td>3-5</td>
+        <td>3-5</td>
+        <td>3-5</td>
+        <td>no</td>
+        <td>equals()<br>hashCode()</td>
+    </tr>
+    <tr>
+        <td>linear probing</td>
+        <td>lg N</td>
+        <td>lg N</td>
+        <td>lg N</td>
+        <td>3-5</td>
+        <td>3-5</td>
+        <td>3-5</td>
+        <td>no</td>
+        <td>equals()<br>hashCode()</td>
+    </tr>
+    </table>
+
+    * 其中separate chaining和linear probing的性能均是建立在均匀性假设的条件上。
 
 ### Context
