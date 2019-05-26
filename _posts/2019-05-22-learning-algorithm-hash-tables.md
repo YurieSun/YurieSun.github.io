@@ -315,7 +315,7 @@ tags: [algorithm]
 4. 数学分析
     * 在均匀性假设下，在一个数量为$M$、含$N=\alpha M$个键的linear probing哈希表中，平均寻找次数为：  
     search hit: $\sim \frac{1}{2}(1+\frac{1}{1-\alpha})$  
-    search miss/insert: $\sim\frac{1}{2}(1+\frac{1}{{1-\alpha}^2})$
+    search miss/insert: $\sim\frac{1}{2}(1+\frac{1}{(1-\alpha)^2})$
     * 参数$M$的选择：若$M$太大，则有很多空位，浪费储存空间；若$M$太小，则搜索时间急剧增加。因此，常选择$\alpha=\frac{N}{M}\sim\frac{1}{2}$，这样的话，search hit的平均次数约为$\frac{3}{2}$，search miss的平均次数约为$\frac{5}{2}$。
 5. resizing
     为使得平均长度$\frac{N}{M}\le\frac{1}{2}$，当$\frac{N}{M}\ge\frac{1}{2}$时，数组大小$M$增加一倍；当$\frac{N}{M}\le\frac{1}{8}$时，数组大小$M$减小一半。
