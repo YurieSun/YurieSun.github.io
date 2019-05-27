@@ -136,8 +136,8 @@ tags: [algorithm]
     ```java
     private int hash(Key key)
     { return Math.abs(key.hashCode()) % M; }
+    // 输出仍有可能是负值
     ```
-    // 输出仍有可能是负值。
     * 正确的做法
     ```java
     private int hash(Key key)
@@ -310,14 +310,14 @@ tags: [algorithm]
     车到达一个含$M$个车位的单行道，每辆车想要的车位为一个随机数$i$，若$i$非空，则依次尝试$i+1$、$i+2$...
     * 分析  
     每辆车的平均寻找次数是多少？  
-    half-full：若开始有$\frac{M}{2}$辆车，则平均寻找次数为$\sim\frac{3}{2}$。
+    half-full：若开始有$\frac{M}{2}$辆车，则平均寻找次数为$\sim\frac{3}{2}$。  
     full：若开始有$M$辆车，则平均寻找次数为$\sim\sqrt{\frac{\pi M}{8}}$。
 4. 数学分析
     * 在均匀性假设下，在一个数量为$M$、含$N=\alpha M$个键的linear probing哈希表中，平均寻找次数为：  
     search hit: $\sim \frac{1}{2}(1+\frac{1}{1-\alpha})$  
     search miss/insert: $\sim\frac{1}{2}(1+\frac{1}{(1-\alpha)^2})$
     * 参数$M$的选择：若$M$太大，则有很多空位，浪费储存空间；若$M$太小，则搜索时间急剧增加。因此，常选择$\alpha=\frac{N}{M}\sim\frac{1}{2}$，这样的话，search hit的平均次数约为$\frac{3}{2}$，search miss的平均次数约为$\frac{5}{2}$。
-5. resizing
+5. resizing  
     为使得平均长度$\frac{N}{M}\le\frac{1}{2}$，当$\frac{N}{M}\ge\frac{1}{2}$时，数组大小$M$增加一倍；当$\frac{N}{M}\le\frac{1}{8}$时，数组大小$M$减小一半。
 6. ST实现的总结
     <table>
@@ -407,3 +407,26 @@ tags: [algorithm]
     * 其中separate chaining和linear probing的性能均是建立在均匀性假设的条件上。
 
 ### Context
+1. 均匀性假设的重要性  
+    separate chaining和linear probing的性能都是建立在均匀性假设的条件上的。因此，若该假设不成立，hash table的性能将会下降。可通过阅读API，向其发送特定数据，从而造成崩溃。
+2. separate chaining vs. linear probing
+    * separate chaining
+        * 更容易实现插入与删除
+        * 性能下降不明显
+        * 对于设计不佳的哈希函数更不敏感
+    * linear probing
+        * 浪费空间较少
+        * 缓存性能更好
+3. hash tables vs. balanced search trees
+    * hash tables
+        * 编程简单。
+        * 对于未排序的键，是最高效的方法。
+        * 对于简单的键速度更快。
+        * 在java中对字符串的系统支持更好（如缓存的hash code）。
+    * balanced search trees
+        * 因没有任何假设，所以其性能保证较好，不会出现性能下降的问题。
+        * 支持有序ST操作。
+        * 与实现equals()和hashCode()相比，正确实现compareTo()更简单。
+    * java中这两种方法都有
+        * Red-black BSTs: java.util.TreeMap, java.util.TreeSet.
+        * Hash tables: java.util.HashMap, java.util.IdentityHashMap.
