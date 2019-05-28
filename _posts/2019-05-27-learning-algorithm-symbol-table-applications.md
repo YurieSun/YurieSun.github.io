@@ -176,3 +176,53 @@ tags: [algorithm]
     ```
 
 ### Sparse Vectors
+1. 稀疏向量
+    * 当一个向量中$0$的个数很多，非$0$元素很少时。称为稀疏向量。
+    * 数组表示  
+    若用一个标准一维数组表示，则访问每个元素的平均时间为常数，所需空间与$N$成正比。
+    * ST表示  
+    若用ST表示其中的非$0$元素，其中key=index、value=entry，则可以实现高效的迭代，所需空间与非$0$元素的个数成正比。
+    * java实现
+    ```java
+    public class SparseVector
+    {
+        //采用HashST因为元素顺序不重要
+        private HashST<Integer, Double> v;
+        publicSparseVector()
+        { v = new HashST<Integer,Double>(); }
+        public void put(int i, double x)
+        { v.put(i, x); }
+        public double get(int i)
+        {
+            if (!v.contains(i)) reutrn 0.0;
+            else return v.get(i);
+        }
+        public Iterable<Integer> indices()
+        { return v.keys(); }
+        //对于稀疏向量，点积的时间为常数。
+        public boolean dot(double[] that)
+        {
+            double sum = 0.0;
+            for (int i : indices())
+                sum += that[i] * this.get(i);
+            return sun;
+        }
+    }
+    ```
+2. 矩阵表示
+    * 二维数组表示  
+    矩阵的每一行看成一个数组，则访问每个元素的时间为常数，所需空间与$N^2$成正比。
+    * 稀疏矩阵表示  
+    矩阵的每一行看成一个稀疏向量，则元素访问较高效，且所需空间与非$0$元素个数（加上ST的额外开销$N$）成正比。
+    * 稀疏矩阵与稀疏向量的乘法
+    ```java
+    ..
+    SparseVector[] a = new SparseVector[N];
+    double[] x = new double[N];
+    double[] b = new double[N];
+    ...
+    //Initailize a[] and x[]
+    ...
+    for (int i = 0; i < N; i++)
+        b[i] = a[i].dot(x);
+    ```
