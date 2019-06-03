@@ -258,6 +258,7 @@ tags: [algorithm]
     ```
 
 ### Challenges
+
 |problem|BFS|DFS|time|
 |:-:|:-:|:-:|:-:|
 |path between s and t|$\surd$|$\surd$|$E+V$|
