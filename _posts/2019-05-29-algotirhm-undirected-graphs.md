@@ -155,7 +155,118 @@ tags: [algorithm]
     ```
 
 ### Breadth-First Search
+1. 基本思路
+    ```java
+    BFS(from source vertex s)
+        Put s onto a FIFO queue, and mark s as visited.
+        Repeat until the queue is empty:
+         - remove the least recently added vertex v
+         - addd each of v's unvisited neighbors to the queue, and mark them as visited.
+    ```
+2. java实现
+    ```java
+    public class BreadthFirstSearch
+    {
+        private boolean[] marked;
+        private int[] edgeTo;
+        private int[] distTo;
+        ...
+        private void bfs(Graph G, int s)
+        {
+            Queue<Integer> q = new Queue<Integer>();
+            q.enqueue(s);
+            marked[s] = true;
+            distTo[s] = 0;
+            while (!q.isEmpty())
+            {
+                int v = q.dequeue;
+                for (int w : G.adj(v))
+                {
+                    if (!marked[])
+                    {
+                        q.enqueue(w);
+                        marked[w] = true;
+                        edgeTo[w] = v;
+                        distTo[w] = dist[v] + 1;
+                    }
+                }
+            }
+        }
+    }
+    ```
+3. 性质
+    * 在任意相连的图G中，BFS可在与$E+V$成正比的时间里找到从s到所有点的最短路径。
+    * 因此。BFS常用于寻找最短路径的问题上。
 
 ### Connected Components
+1. 连接查询
+    * 定义：点v和w之间是否有路径相连
+    * API
+    ```java
+    public class CC
+        CC(Graph G)//站到G中的连通分量
+        boolean connected(int v, int w)//v与w是否相连？
+        int count()//连接分量的个数
+        int id(int v)//v的分量标识
+2. 连通分量
+    * “连接”关系是一个等价关系：
+        * 自反性：v与v是相连的；
+        * 对称性：若v与w相连，则w与v也相连；
+        * 传递性：若v与w相连，w与x相连，则v与x相连。
+    * 连通分量是相连点的最大集合。给定连通分量，可在常数时间内回答是否连通的问题。
+    * 将点分成连通分量
+    ```java
+    Connected components
+        Initialize all vertices v as unmarked.
+        For each unmarked vertex v, run DFS to identify all vertices discovered as part of the same component.
+    ```
+3. 用DFS找连通分量的java实现
+    ```java
+    public class CC
+    {
+        private boolean[] marked;
+        private int[] id;
+        private int count;
+        public CC(graph G)
+        {
+            marked = new boolean[G.V()];
+            id = new int[G.V()];
+            for (int v = 0; v < G.V(); v++)
+            {
+                if (!marked[v])
+                {
+                    dfs(G, v);
+                    count++;
+                }
+            }
+        }
+        public int count();
+        { return count; }
+        public int id(int v);
+        { return id[v]; }
+        public boolean connected(int v, int w)
+        { return id[v] == id[w]; }
+        private void dfs(Grapf G, int v)
+        {
+            marked[v] = true;
+            id[v] = count;
+            for (int w : G.adj(v))
+                if (!marked[w])
+                    dfs(G, w);
+        }
+    }
+    ```
 
 ### Challenges
+|problem|BFS|DFS|time|
+|:-:|:-:|:-:|:-:|
+|path between s and t|$\surd$|$\surd$|$E+V$|
+|shortest path between s and t|$\surd$||$E+V$|
+|connected components|$\surd$|$\surd$|$E+V$|
+|biconnected components||$\surd$|$E+V$|
+|cycle|$\surd$|$\surd$|$E+V$|
+|Euler cycle||$\surd$|$E+V$|
+|Hamilton cycle|||$2^{1.657V}$|
+|bipartiteness|$\surd$|$\surd$|$E+V$|
+|planarity||$\surd$|$E+V$|
+|gragh isomorphism|||$2^{c\sqrt{V\log V}}$|
