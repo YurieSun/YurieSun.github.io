@@ -47,7 +47,7 @@ tags: [algorithm]
     |:-:|:-:|:-:|:-:|:-:|
     |list of edges|$E$|$1$|$E$|$E$|
     |adjacency matrix|$V^2$|$1$|$1$|$V$|
-    |adjacency lists|$E+V$|$1$|degeree(v)|degree(v)|
+    |adjacency lists|$E+V$|$1$|degree(v)|degree(v)|
 4. adjacency-list graph的java实现
     ```java
     public class Graph
