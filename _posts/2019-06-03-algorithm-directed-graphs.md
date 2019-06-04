@@ -93,6 +93,7 @@ tags: [algorithm]
 2. digraph 的BFS
     * 基本思路（与undirected graph一样）  
     每个undirected graph都是一个digraph（有两个方向的边），因此BFS是一个diagraph算法。
+    
     ```java
     BFS(from source vertex s)
         Put s onto a FIFO queue, and mark s as visited.
