@@ -93,7 +93,7 @@ tags: [algorithm]
 2. digraph 的BFS
     * 基本思路（与undirected graph一样）  
     每个undirected graph都是一个digraph（有两个方向的边），因此BFS是一个diagraph算法。
-    
+
     ```java
     BFS(from source vertex s)
         Put s onto a FIFO queue, and mark s as visited.
@@ -137,5 +137,115 @@ tags: [algorithm]
         ```
 
 ### Topological Sort
+1. 基本定义
+    * DAG：Directed acyclic graph
+    * topological sort：重建DAG使得所有边的方向指向上端。
+    * 方法：DFS  
+    运行DFS，再以reverse postorder的顺序返回点。
+2. java实现
+    ```java
+    public class DepthFirstOrder
+    {
+        private boolean[] marked;
+        private Stack<Integer> reversePostorder;
+        public DepthFirstOrder(Diagraph G)
+        {
+            reversePostorder = new Stack<Integer>();
+            marked = new boolean[G.V()];
+            for (int v = 0; v < G.V(); v++)
+                if (!marked[v] dfs(G, v);
+        }
+        private void dfs(Digraph G, int v)
+        {
+            marked[v] = true;
+            for (int w : adj(v))
+                if (!marked[w]) dfs(G, w);
+            reversePostorder.push(v);
+        }
+        public Iterable<Integer> reversePostorder()
+        { return reversePostorder; }
+    }
+    ```
+3. 算法的正确性说明
+    * DAG的reverse DFS postorder是一个topological ordeer。
+    * 考虑任一从v指向w的边，当调用dfs(v)时，有以下三种情况：
+        * case 1：dfs(w)已经被调用并返回，那么w在v之前被处理；
+        * case 2：dfs(w)未被调用，dfs(w)将被dfs(v)直接或间接调用，并将在dfs(v)之前完成返回，因此w在v之前被处理；
+        * case3：dfs(w)已经被调用但未返回，这在DAG中不可能发生。若存在这种情况，则函数调用栈中存在w指向v的路径，说明v至w有一个回路，这违背了DAG的定义。
+4. directed cycle detection
+    * 当且仅当diagragh中没有回路时，它才有一个topological order。
+    * 若有回路，则不可能有topological order；若没有回路，基于DFS的算法可以找到一个topological order。
+    * 可用于检测digraph中是否含有回路。
+    * 应用
+        * 计划制定：有回路说明不能制定一个这样的计划。
+        * java compiler中的cyclic inheritance：若函数调用存在回路，则报错。
+        * 电子表格的计算：Excel中使用函数时，若存在回路，则出错。
+5. DFS的各种顺序
+    * preorder：dfs()调用的顺序
+    * postorder：dfs()返回的顺序
+    * reverse postorder：dfs()返回的反顺序
+    ```java
+    private void dfs(Graph G, int v)
+    {
+        marked[v] = true;
+        preorder.enqueue(v);
+        for (int w : G.adj(v))
+            if (!marked[w]) dfs(G, w);
+        postorder.enqueue(v);
+        reversePostorder.push(v);
+    }
+    ```
 
 ### Strong Components
+1. strong-connetced components
+    * 定义  
+    若点v和w同时存在v到w的有向路径和w到v的有向路径，则称v和w是strongly connected的。
+    * 性质
+        * 自反性：v与本身是强连接的；
+        * 对称性：若v与w是强连接的，则w与v也是强力连接的；
+        * 传递性：若v与w是强连接的，w与x是强连接的，则v与x是强连接的。
+    * strong component是指一个最大的包含所有强连接点的集合。
+    * 应用
+        * 生物链：vertex是生物种类，edge是从生产者到消费者的路径，则strong component指具有同一能量流的生物种类的集合。
+        * 软件模块：vertex是软件模块，edge是从某一模块到所依赖的模块，则strong component指有相互作用的模块集合。由此可将strong component的模块进行封装，以改善设计。
+2. Kosaraju-Sharir算法
+    * $G$中的strong component与$G^R$中的一样。
+    * kernel DAG：将每个strong component视为单个点。
+    * 实现想法：计算kernal DAG的topological order，再以reverse topological order的顺序运行DFS。
+    * 实现
+        * 第一步：计算$G^R$中的strong component；
+        * 第二步：在$G$中运行DFS，以$G^R$中reverse postorder的顺序访问$G$中unmarked的点。
+    * 数学分析：该算法计算digraph中的strong component的时间与$E+V$成正比。
+    * java实现
+    ```java
+    public class KosarajuSharirSCC
+    {
+        private boolean marked[];
+        private int[] id;
+        private int count;
+        public KosarajuSharirSCC(Digraph G)
+        {
+            marked = new boolean[G.V()];
+            id = new int[G.V()];
+            DepthFirstOrder dfs = new DepthFirstOrder(G.reverse());
+            for (int v : dfs.reversePostorder())
+            {
+                if (!marked[v])
+                {
+                    dfs(G, v);
+                    count++;
+                }
+            }
+        }
+        private void dfs(Digraph G, int v)
+        {
+            marked[v] = true;
+            id[v] = count;
+            for (int w :G.adj(v))
+                if(!marked[w])
+                    dfs(G, w);
+        }
+        public boolean stronglyConneted(int v, int w)
+        { return id[v] == id[w]; }
+    }
+    ```
