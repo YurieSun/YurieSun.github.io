@@ -139,7 +139,52 @@ tags: [algorithm]
     ```
 
 ### Kruskal's Algorithm
+1. 方法  
+    将边按照权重大小升序排列，依次将边放入MST中，若形成回路则忽略该边，直到找到$V-1$条边。
+2. 证明  
+    * Kruskal's algorithm可以计算出MST，因为该算法是greedy MSTalgorithm的一个特例。
+    * 假设Kruskal's algorithm将边$e=v-w$设为黑色，则可将cut视为将图分为两部分：与$v$相连的点集、其余点形成的集合。不存在黑色的crossing edge，且不存在权重更小的crossing edge。
+3. 挑战与解决方法  
+    如何检测将边$v-w$加入后形成了回路？
+    * 若从v开始运行DFS，检测是否能到达w，则需要时间为$V$。
+    * 若使用union-find，则需要时间仅为$\log V$。
+    * 因此，采用union-find数据结构。维护在树中的每一个connected component集合。若$v$和$w$在同一个集合，则$v-w$将形成回路；若不在，则将含有$v$和$w$的集合合并，从而将$v-w$加入MST中。
+4. java实现
+    ```java
+    public class KruskalMST
+    {
+        private Queue<Edge> mst = new Queue<Edge>();
+        public KruskalMST(EdgeWeightedGraph G)
+        {
+            MinPQ<Edge> pq = new MinPQ<Edge>(G.edges());
+            UF uf = new UF(G.V());
+            while (!pq.isEmpty() && mst.size() < G.V() - 1)
+            {
+                Edge e = pq.delMin();
+                int v = e.either(), w = e.other(v);
+                if (!uf.connected(v, w))
+                {
+                    uf.union(v, w);
+                    mst.enqueue(e);
+                }
+            }
+        }
+        public Iterable<Edge> edges()
+        { return mst; }
+    }
+    ```
+5. 运行时间
+    * Kruskal's algorithm计算MST的时间与$E\log E$成正比（在最坏情况下）。
+
+    |operation|frequency|time per op|
+    |:-:|:-:|:-:|
+    |build pq|$1$|$E$|
+    |delete-min|$E$|$\log E$|
+    |union|$V$|$\log^* V$|
+    |connected|$E$|$\log^* V$|
+    * 其中，$\log^* V\le5$。若边已经是有序的，则时间变为$E\log^*V$。
 
 ### Prim's Algorithm
+
 
 ### Context
