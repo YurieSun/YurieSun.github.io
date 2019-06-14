@@ -141,7 +141,7 @@ tags: [algorithm]
 ### Kruskal's Algorithm
 1. 方法  
     将边按照权重大小升序排列，依次将边放入MST中，若形成回路则忽略该边，直到找到$V-1$条边。
-2. 证明  
+2. 正确性证明  
     * Kruskal's algorithm可以计算出MST，因为该算法是greedy MSTalgorithm的一个特例。
     * 假设Kruskal's algorithm将边$e=v-w$设为黑色，则可将cut视为将图分为两部分：与$v$相连的点集、其余点形成的集合。不存在黑色的crossing edge，且不存在权重更小的crossing edge。
 3. 挑战与解决方法  
@@ -185,6 +185,84 @@ tags: [algorithm]
     * 其中，$\log^* V\le5$。若边已经是有序的，则时间变为$E\log^*V$。
 
 ### Prim's Algorithm
+1. 方法  
+    从点0开始，将与MST中其中一个点相连的边当中权重最小的边加入MST中，重复直到MST中有$V-1$条边。
+2. 正确性证明
+    * Prim's algorithm可以计算出MST，因为该算法是greedy MSTalgorithm的一个特例。
+    * 假设边$e$是连接MST中的点和不在MST中的点的一条边且具有最小权重，则可将cut视为将图分为两部分：与$v$相连的点集、其余点形成的集合。不存在黑色的crossing edge，且不存在权重更小的crossing edge。
+3. 挑战与解决方法  
+    如何找到仅与MST中一个点相连的具有最小权重的边？
+    * 若将所有边尝试一遍，所需时间为$E$；
+    * 若使用priority queue，则所需时间变为$\log E$。
+    * 因此，采用priority queue的数据结构。(lazy solution)维护一个至少含MST中一个点的边的PQ，其中，key指边，priority指边的权重。通过delete-min方法删除边$e=v-w$并加入到MST，若$v$和$w$均被标记，即均在MST中，则忽略；否则，假设$w$是不在MST中的点，则将与$w$相连的所有边都加入PQ，同时将边$e$加入到MST，并将$w$进行标记。
+4. lazy implementation
+    ```java
+    public class LazyPrimMST
+    {
+        private boolean[] marked;
+        private Queue<Edge> mst;
+        private MinPQ<Edge> pq;
+        public LazyPrimMST(WeightedGraph G)
+        {
+            pq = mew MinPQ<Edge>();
+            mst = Queue<Edge>();
+            marked = new boolean[G.V()];
+            visit(G, 0);
+            while (!pq.isEmpty() && mst.size < G.V() - 1)
+            {
+                Edge = pq.delMin();
+                int v = e.either(), w = e.other(v);
+                if(marked[v] && marked[w]) continue;
+                mst.enqueue(e);
+                if (!marked[v]) visit(G, v);
+                if (!marked[w]) visit(G, w);
+            }
+        }
+        private void visit(WeightedGraph G, int v)
+        {
+            marked[v] = true;
+            for (Edge e : G.adj(v))
+                if (!marked[e.other(v)])
+                    pq.insert(e);
+        }
+        public Iterable<Edge> mst()
+        { return mst; }
+    }
+    ```
+    * 运行时间  
+    lazy Prim's algorithm计算MST的时间与$E\log E$成正比，且额外需要的空间与$E$成正比（在最坏情况下）。
 
+    |operation|frequency|binary heap|
+    |:-:|:-:|:-:|
+    |delete min|$E$|$\log E$|
+    |insert|$E$|$\log E$|
+5. eager implementation
+    * 挑战  
+    找到仅与MST中一个点相连且权重最小的边。
+    * 解决方法  
+    维护一个与MST通过边相连的点的PQ，其中对于PQ中的每个点最多只有一个索引。而点$v$的priority是指通过$v$与MST相连的最短边的权重。具体步骤是，用delete min方法将最小点$v$从PQ中删除，并将与其相关的边$e=v-w$加入到MST中；考虑所有与$v$相连的边$e=v-x$并更新PQ：若$x$已在MST中，则忽略；若$x$不在，则加入到PQ中；若$v-x$成为通过$x$与MST相连的最短边，则降低对应的priority。
+    * indexed priority queue
+        * 将PQ中每个键对应到$0$至$N-1$的索引，从而可提供insert和delete-the-minimum方法，且对给定的键的索引提供decrease-key方法。
+        ```java
+        public class IndexMinPQ<Key extends Comparable<Key>>
+            IndexMinPQ(int N) //创建索引为0到N-1的indexed PQ
+            void insert(int i, Key key) //将索引i与key相连
+            void decreaseKey(int i, Key key) //减小与索引i相连的key
+            boolean contains(int i)
+            int delMin()
+            boolean isEmpty()
+            int size()
+        ```
+        * binary heap implementation  
+        与MinPQ的代码相同，维护多个数组keys[]、pq[]和qp[]，其中keys[i]是i的priority，pq[i]是heap position为i的键对应的索引，qp[i]是具有索引i的键的heap position；使用swim(qp[i])来实现decreaseKey(i, key)。
+    * 使用不同PQ实现方法  
+    对于密集的图，使用数组实现较好；而对于稀疏的图，binary heap更快；在性能较重要的情况下，值得使用4-way heap；而Fibonacci heap在理论上很不错，但难以实现。
+
+    |PQ implementation|insert|delete-min|decrease-key|total|
+    |:-:|:-:|:-:|:-:|:-:|
+    |unordered array|$1$|$V$|$1$|$V^2$|
+    |binary heap|$\log V$|$\log V$|$\log V$|$E\log V$|
+    |d-way heap|$\log_d V$|$\log_d V$|$\log_d V$|$E\log_{E/V} V$|
+    |Fibonacci heap|$1$|$\log V$|$1$|$E+V\log V$|
 
 ### Context
