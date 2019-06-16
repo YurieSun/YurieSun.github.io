@@ -266,3 +266,20 @@ tags: [algorithm]
     |Fibonacci heap|$1$|$\log V$|$1$|$E+V\log V$|
 
 ### Context
+1. 是否存在linear-time MST algorithm？  
+    有非常接近线性的，但仍未找到线性的算法，也还未证明是否存在这样的算法。
+2. Eucliden MST
+    * 问题描述  
+    给定$N$个点，找到连接它们的MST，其中每个点之间的距离为欧氏距离。
+    * 粗暴方法：计算$\sim\frac{N^2}{2}$个距离，并运行Prim's algorithm。  
+    更聪明的方法：利用几何知识，在$\sim cN\log N$时间内完成。
+3. clustering
+    * k-clustering  
+    将对象分为k个组，其中用距离表示两个对象之间的相似度。
+    * single link  
+    两个cluster之间的距离是指其中两个最近对象之间的距离。
+    * single-link clustering  
+    给定一个整数k，找到一个k-clustering，使得每两个最近的cluster之间的距离最大。
+    * "well-known" algorithm for single-link clustering  
+        * 给每一个对象创建一个cluster，共V个cluster；找到最近的不在同一个cluster的两个对象，并将两个cluster进行合并；重复直至剩下k个cluster。
+        * 另一种方法：运行Prim，并删除k-1个最大权重的边。
