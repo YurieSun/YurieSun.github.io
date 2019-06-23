@@ -200,8 +200,9 @@ tags: [algorithm]
         }
     }
     ```
-4. 不同PQ实现方法
-    对于密集的图，使用数组实现较好；而对于稀疏的图，binary heap更快；在性能较重要的情况下，值得使用4-way heap；而Fibonacci heap在理论上很不错，但难以实现。
+4. 不同PQ实现方法  
+    * 对于密集的图，使用数组实现较好；而对于稀疏的图，binary heap更快；在性能较重要的情况下，值得使用4-way heap；而Fibonacci heap在理论上很不错，但难以实现。
+
     |PQ implementation|insert|delete-min|decrease-key|total|
     |:-:|:-:|:-:|:-:|:-:|
     |unordered array|$1$|$V$|$1$|$V^2$|
@@ -252,6 +253,7 @@ tags: [algorithm]
     * longest paths in edge-weighted DAGs
         * 可将其转换成最短路径问题，即将所有权重变成其相反数，找到最短路径，再将总权重变成其相反数，得到的便是权重和最大的路径，即最长路径。
         * 可用于parallel job scheduling中。
+
 ### Negative Weights
 1. negative cycles
      * 定义  
