@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 算法笔记（十七）
-description: "学习资料：algorithm (Princiton University)"
+description: "学习资料：algorithm (Princeton University)"
 keywords: test
 category: Learning
 tags: [algorithm]
