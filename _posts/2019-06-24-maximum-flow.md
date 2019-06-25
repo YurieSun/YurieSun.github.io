@@ -32,6 +32,7 @@ tags: [algorithm]
     * 向前的edge是满的；
     * 向后的边是空的。
 4. Ford-Fulkerson algorithm
+
     ```java
     Start with 0 flow.
     While there exists an augmenting path:
