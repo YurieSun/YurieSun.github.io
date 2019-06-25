@@ -38,6 +38,7 @@ tags: [algorithm]
       - find an augmenting path
       - compute bottlenect capacity
       - increase flow on that path by bottleneck capacity
+    ```
 5. 需要解决的问题
     * 怎样计算mincut？
     * 怎样找到augmenting path？
@@ -145,6 +146,7 @@ tags: [algorithm]
             //else throw new IllegalArgumentException();
         } 
     }
+    ```
 3. flow network
     * API
     ```java
