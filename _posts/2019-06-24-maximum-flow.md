@@ -1,5 +1,5 @@
 ---
-layout: post;
+layout: post
 title: 算法笔记（十八）
 description: "学习资料：algorithm (Princeton University)"
 keywords: test
