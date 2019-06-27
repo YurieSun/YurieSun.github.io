@@ -242,3 +242,12 @@ tags: [algorithm]
     ```
 
 ### Applications
+1. 应用举例
+    * bipartite matching problem
+    * baseball elimination problem
+2. 总结
+    * mincut problem：找到一个具有最小capacity的st-cut
+    * maxflow problem：找到一个具有最大value的st-flow
+    * duality：maxflow的value = mincut的capacity
+    * 目前较成功的方法：Ford-Fulkerson、Preflow-push
+    * 挑战：实现在实际应用中的线性时间的mincut/maxflow问题；理论上证明最坏情况下可实现线性时间。
