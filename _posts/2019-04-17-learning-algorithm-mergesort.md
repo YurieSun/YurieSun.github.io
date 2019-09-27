@@ -12,7 +12,7 @@ tags: [algorithm]
 ### Mergesort
 1. 两个经典排序算法
     * Mergesort  
-    Java sort forobjects. 
+    Java sort for objects.  
     Perl, C++ stable sort, Python stable sort, Firefox JavaScript, ...
     * Quicksort  
     Java sort for primitive types.  
@@ -45,7 +45,7 @@ tags: [algorithm]
     * assertion用于检验程序中的假设，帮助检测错误，且能在重读程序时能快速知道起始的假设及最后做了什么。
     * java中的assertion接收一个返回值为boolean的函数，若返回值为false则报错。
     * 在程序中可随时开启assertion以达到不同目的。
-    * 最好的使用方法是，在变成过程中使用assertion来检测错误，在最终的产品程序中禁用，若出现问题，可再次打开以找出错误。
+    * 最好的使用方法是，在编程过程中使用assertion来检测错误，在最终的产品程序中禁用，若出现问题，可再次打开以找出错误。
 5. mergesort的java实现
     ```java
     public class Merge
