@@ -40,7 +40,8 @@ class Solution {
 * 改进  
 1. 用hashmap的方式存放会更好，一定要注意哪个元素作为key，哪个作为value；
 2. 在遇到右括号出栈时，若为空则赋一个其他值；
-3. 最后处理完所有字符后可直接返回isEmpty()，省略if判断。
+3. 最后处理完所有字符后可直接返回isEmpty()，省略if判断；
+4. charAt(index)不会跳过空格，因此仍需要对空格进行处理。
 
 ```java
 class Solution {
@@ -52,6 +53,7 @@ class Solution {
         map.put('}', '{');
         for (int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
+            if(c == ' ') continue;
             if(map.containsKey(c)){
                 char top = str.isEmpty() ? '#' : str.pop();
                 if(map.get(c) != top) return false;
