@@ -37,6 +37,32 @@ class Solution {
     }
 }
 ```
+* 改进  
+1. 用hashmap的方式存放会更好，一定要注意哪个元素作为key，哪个作为value；
+2. 在遇到右括号出栈时，若为空则赋一个其他值；
+3. 最后处理完所有字符后可直接返回isEmpty()，省略if判断。
+
+```java
+class Solution {
+    public static boolean isValid(String s) {
+        Stack<Character> str = new Stack<>();
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put(']', '[');
+        map.put('}', '{');
+        for (int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if(map.containsKey(c)){
+                char top = str.isEmpty() ? '#' : str.pop();
+                if(map.get(c) != top) return false;
+            } 
+            else
+                str.push(c);
+        }
+        return str.isEmpty();
+    }
+}
+```
 ### 思考
 其中若字符为右括号时，首先要查看栈是否为空再取元素，否则会报错。
 
