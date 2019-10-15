@@ -135,9 +135,26 @@ class Solution {
 ```java
 class Solution {
     public int strStr(String haystack, String needle) {
-        
+        if(needle.length() == 0) return 0;
+        if(needle.length() > haystack.length()) return -1;
+        int N = haystack.length();
+        int M = needle.length();
+        int[][] dfa = new int[256][M];
+    	dfa[needle.charAt(0)][0] = 1;
+    	for (int X = 0, j = 1; j < M; j++) {
+    		for (int c = 0; c < 256; c++)
+    			dfa[c][j] = dfa[c][X];
+    		dfa[needle.charAt(j)][j] = j+1;
+    		X = dfa[needle.charAt(j)][X];
+    	}
+    	int i, j;
+        for (i = 0,j = 0; i < N && j < M; i++) 
+        	j = dfa[haystack.charAt(i)][j];
+        if(j == M) return i-M;
+        return -1;
     }
 }
 ```
 
 ### 思考
+在LeetCode上运行KMP算法，所用时间与内存均大于暴力算法，这与LeetCode的测试用例有关。KMP算法的优势在于不用回退`haystack`指针，但计算`dfa[][]`数组需要额外的空间，且较适用于`needle`中重复前缀较多的情况。
