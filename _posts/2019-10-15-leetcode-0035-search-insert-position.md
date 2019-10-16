@@ -8,7 +8,7 @@ tags: [solving LeetCode]
 ---
 
 ### 题目描述
-[实现strStr](https://leetcode-cn.com/problems/search-insert-position/)
+[搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)
 
 ### 思路
 二分查找
