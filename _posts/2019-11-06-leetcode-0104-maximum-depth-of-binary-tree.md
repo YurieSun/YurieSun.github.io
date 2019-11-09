@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode 0101 题解
+title: LeetCode 0104 题解
 description: "二叉树的最大深度"
 keywords: test
 category: LeetCode
