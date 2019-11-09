@@ -62,7 +62,7 @@ for(int i = 1; i < rowIndex+1; i++){
     preRow = row;
 }
 ```
-* 改进二：只使用一个`List`集合（这里的内循环有点难理解，其实每次循环保存下来的`temp`是第$j$个值，随后赋给`pre`，给下一次$j$循环使用；那么相对于下次的$j$来说，这个`pre`就是第$j-1$个，即它的上一行的前一个值，因此此时可将第$j$个值更新为`precur.get(j)`。）
+* 改进二：只使用一个`List`集合（这里的内循环有点难理解，其实每次循环保存下来的`temp`是第$j$个值，随后赋给`pre`，给下一次$j$循环使用；那么相对于下次的$j$来说，这个`pre`就是第$j-1$个，即它的上一行的前一个值，因此此时可将第$j$个值更新为`pre + cur.get(j)`。）
 ```java
 class Solution {
     public List<Integer> getRow(int rowIndex) {
