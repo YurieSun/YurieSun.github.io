@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [求众数](https://leetcode-cn.com/problems/majority-element/)
 
 ### 题解
-* 法一：通过hashmap将每个元素及其出现次数储存起来，并返回次数为$\lfloor \frac{N}{2} \rfloor$的元素。
+* 法一（哈希表）：通过hashmap将每个元素及其出现次数储存起来，并返回次数大于$\lfloor \frac{N}{2} \rfloor$的元素。
 ```java
 class Solution {
     public int majorityElement(int[] nums) {
@@ -31,7 +31,7 @@ class Solution {
     }
 }
 ```
-* 法二：（Boyer-Moore投票法）由于众数出现的次数大于$\lfloor \frac{N}{2} \rfloor$，因此若令众数为1，其余数为-1，则总和必定大于0。可将第一个数先设为众数，`count`设为0，并扫描后面的元素，相同时`count`加1，不同时`count`减1，直到`count`变为0时，说明已扫描元素均被抵消，不可能再成为众数；因此将下一元素设为众数，循环此过程，直到扫描完成，留下来的数就是众数。
+* 法二（Boyer-Moore投票法）：由于众数出现的次数大于$\lfloor \frac{N}{2} \rfloor$，因此若令众数为1，其余数为-1，则总和必定大于0。可将第一个数先设为众数，`count`设为0，并扫描后面的元素，相同时`count`加1，不同时`count`减1，直到`count`变为0时，说明已扫描元素均被抵消，不可能再成为众数；因此将下一元素设为众数，循环此过程，直到扫描完成，留下来的数就是众数。
 ```java
 class Solution {
     public int majorityElement(int[] nums) {
