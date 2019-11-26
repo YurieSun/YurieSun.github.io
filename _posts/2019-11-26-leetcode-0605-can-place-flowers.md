@@ -99,7 +99,7 @@ class Solution {
     }
 }
 ```
-2. 法二：在数组两端增加0，这样就不用判定边界条件，只要出现连续三个0，就在中间位置种花。（需额外空间）
+3. 法三：在数组两端增加0，这样就不用判定边界条件，只要出现连续三个0，就在中间位置种花。（需额外空间）
 ```java
 class Solution {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
