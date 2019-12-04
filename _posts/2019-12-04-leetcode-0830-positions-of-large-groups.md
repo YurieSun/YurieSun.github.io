@@ -52,7 +52,7 @@ class Solution {
     }
 }
 ```
-3. 法三：遍历字符串，记录相同字符的起始下标与结束下标。这里要注意的是循环变量`i`的结束值被设为`S.length()`，同样是为了判断判断整个字符串均为同一字母的情况。
+3. 法三：遍历字符串，记录相同字符的起始下标与结束下标。这里要注意的是循环变量`i`的结束值被设为`S.length()`，同样是为了判断整个字符串均为同一字母的情况。
 ```java
 class Solution {
     public List<List<Integer>> largeGroupPositions(String S) {
