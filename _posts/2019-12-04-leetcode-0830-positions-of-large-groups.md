@@ -71,3 +71,4 @@ class Solution {
     }
 }
 ```
+* 注意：`Arrays.asList()`方法用于将数组或一些元素转换成集合。
