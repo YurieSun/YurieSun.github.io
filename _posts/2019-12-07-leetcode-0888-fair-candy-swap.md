@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [公平的糖果交换](https://leetcode-cn.com/problems/fair-candy-swap/)
 
 ### 题解
-1. 法一：分别计算两人糖果总数，它们差值的一般即为索要交换糖果之间的差；则同时遍历两个数组，找到满足该差值的两个数即可。
+1. 法一：分别计算两人糖果总数，它们差值的一半即为所要交换糖果之差；然后同时遍历两个数组，找到满足该差值的两个数即可。
 ```java
 class Solution {
     public int[] fairCandySwap(int[] A, int[] B) {
@@ -28,7 +28,7 @@ class Solution {
     }
 }
 ```
-* 法二：同法一一样计算需交换糖果之间的差值；然后将数组A的元素装入`set`中，再遍历数组B，以找到与数组元素具有之前差值的元素。
+* 法二：首先仍然计算需交换糖果之差；然后将数组A的元素装入`set`中，再遍历数组B，以找到与数组元素具有所计算差值的元素。
 ```java
 class Solution {
     public int[] fairCandySwap(int[] A, int[] B) {
