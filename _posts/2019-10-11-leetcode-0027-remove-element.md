@@ -30,6 +30,18 @@ class Solution {
     }
 }
 ```
+* 也可写为：
+```java
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int i = 0;
+        for(int n :nums)
+            if(n != val)
+                nums[i++] = n;
+        return i;
+    }
+}
+```
 * 改进  
 若元素很多时，复制元素消耗较多资源和时间，因此采用另一种方案（该方案改变了删除后的元素位置）：  
 若`nums[i] == val`，则将最后一个元素复制到$i$的位置上，同时数组长度减1；若不相等则递增$i$；重复该过程直至数组末尾。
