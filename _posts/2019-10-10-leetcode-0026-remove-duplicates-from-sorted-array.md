@@ -30,5 +30,17 @@ public class Solution {
     }
 }
 ```
+* 也可写为：
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int i = 0;
+        for(int n : nums)
+            if(n != nums[i])
+                nums[++i] = n;
+        return i+1;
+    }
+}
+```
 ### 思考
 学习双指针法。
