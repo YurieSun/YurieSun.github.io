@@ -16,7 +16,7 @@ tags: [solving LeetCode]
 class Solution {
     public int firstMissingPositive(int[] nums) {
         int len = nums.length;
-        // 虽然看上去是两重循环，但每个元素经过1次就能方法到正确的位置，其时间复杂度仍未O(n)。
+        // 虽然看上去是两重循环，但每个元素经过1次就能放到正确的位置，其时间复杂度仍为O(n)。
         for(int i = 0; i < len; i++)
             while(nums[i] >= 1 && nums[i] <= len && nums[nums[i]-1] != nums[i]){
                 int temp = nums[nums[i]-1];
@@ -60,4 +60,5 @@ class Solution {
     }
 }
 ```
+
 * 注意：该方法比较麻烦，主要学习在同一个数组既能表示元素又能表示元素是否出现的思想。
