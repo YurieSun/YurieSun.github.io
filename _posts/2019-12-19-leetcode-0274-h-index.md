@@ -69,6 +69,29 @@ class Solution {
     }
 }
 ```
+* 更容易理解的版本：
+```java
+class Solution {
+    public int hIndex(int[] citations) {
+        if(citations == null || citations.length == 0)
+            return 0;
+        int N = citations.length, total = 0;
+        int[] num = new int[N+1];
+        for(int c : citations){
+            if(c > N)
+                num[N]++;
+            else
+                num[c]++;
+        }
+        for(int i = N; i >= 0; i--){
+            total += num[i];
+            if(total >= i)
+                return i;
+        }
+        return 0;
+    }
+}
+```
 
 ### 思考
 1. 比较排序的最低时间复杂度为$O(n\lg n)$，不使用额外空间；而计数排序的时间复杂度为$O(n)$，但需要$O(n)$的额外空间。
