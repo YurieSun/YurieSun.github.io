@@ -15,14 +15,15 @@ tags: [solving LeetCode]
     ```
     dp[i][k][0] = Math.max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
     dp[i][k][1] = Math.max(dp[i-1][k-1][0] - prices[i], dp[i-1][k][1]);
-    ```
+    ```  
     根据状态方程，可写出关于`i`和`k`的两重循环。同时要注意初始值的选取如下
     ```
     [-1][k][0] = 0;
     [-1][k][1] = Integer.MIN_VALUE;
     [i][0][0] = 0;
     [i][0][1] = Integer.MIN_VALUE;
-    ```
+    ```  
+    由此可得以下算法：
 ```java
 class Solution {
     public int maxProfit(int[] prices) {
