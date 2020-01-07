@@ -72,7 +72,7 @@ class Solution {
             return 0;
         int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
         // 找到数组中的最大值和最小值
-        for(int i ： nums){
+        for(int i : nums){
             max = Math.max(max, i);
             min = Math.min(min, i);
         }
