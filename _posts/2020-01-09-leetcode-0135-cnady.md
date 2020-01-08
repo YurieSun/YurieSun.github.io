@@ -1,14 +1,14 @@
 ---
 layout: post
-title: LeetCode 0287 题解
-description: "寻找重复数"
+title: LeetCode 0135 题解
+description: "分发糖果"
 keywords: test
 category: LeetCode
 tags: [solving LeetCode]
 ---
 
 ### 题目描述
-[寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)
+[分发糖果](https://leetcode-cn.com/problems/candy/)
 
 ### 题解
 1. 法一：比较排序、用Set集合保存元素、桶排序均不满足题目的要求。
@@ -55,7 +55,6 @@ class Solution {
 }
 ```
    * 时间复杂度为 $O(n \lg n)$。
-
 * 附桶+抽屉原理的算法
 ```java
 class Solution {
