@@ -14,6 +14,7 @@ tags: [solving LeetCode]
 若遇到相同元素，则跳过并指向下一元素；若不相同，则移动当前元素。
 
 ### 题解
+1. 法一（迭代法）
 ```java
 /**
  * Definition for singly-linked list.
@@ -33,6 +34,17 @@ class Solution {
         		cur = cur.next;
         }
         return head;
+    }
+}
+```
+2. 法二（递归法）
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null || head.next == null)
+            return head;
+        head.next = deleteDuplicates(head.next);
+        return head.val == head.next.val ? head.next : head;
     }
 }
 ```
