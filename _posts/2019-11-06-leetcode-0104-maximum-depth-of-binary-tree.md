@@ -35,7 +35,7 @@ class Solution {
 ```java
 import javafx.util.Pair; //要将Pair类导入，或自己定义。
 class Solution {
-    public boolean isSymmetric(TreeNode root) {
+    public int maxDepth(TreeNode root) {
 		Queue<Pair<TreeNode, Integer>> q = new LinkedList<>();
 		if(root != null)
             q.add(new Pair(root, 1));
@@ -58,7 +58,7 @@ class Solution {
 ```java
 import javafx.util.Pair;
 class Solution {
-    public boolean isSymmetric(TreeNode root) {
+    public int maxDepth(TreeNode root) {
 		Stack<Pair<TreeNode, Integer>> s = new Stack<>();
         if(root != null)
             s.add(new Pair(root, 1));
@@ -79,8 +79,8 @@ class Solution {
 ```
 ### 思考
 * 递归  
-时间复杂度：$O(N)$ 
+时间复杂度：$O(N)$  
 空间复杂度：最好情况是完全二叉树，此时为$O(\log N)$；最坏情况是完全不平衡的树，相当于线性表结构，此时为$O(N)$。
 * BFS和DFS  
-时间复杂度：$O(N)$ 
+时间复杂度：$O(N)$  
 空间复杂度：$O(N)$
