@@ -35,6 +35,25 @@ class Solution {
     }
 }
 ```
+* 也可写成：
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null)
+            return true;
+        return isSymmetric(root.left, root.right);
+    }
+    private boolean isSymmetric(TreeNode s, TreeNode t){
+        if(s == null && t == null)
+            return true;
+        if(s == null || t == null)
+            return false;
+        if(s.val != t.val)
+            return false;
+        return isSymmetric(s.left, t.right) && isSymmetric(s.right, t.left);
+    }
+}
+```
 * 法二：迭代（将节点依次放入队列中，每次将两个节点出队，判断是否相等，再把$A$的左节点和$B$右节点入队，直到遇到空节点；在查看过程中一旦遇到不相等的元素即返回。
 ```java
 class Solution {
