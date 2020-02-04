@@ -30,7 +30,7 @@ class Solution {
     }
 }
 ```
-* 状态方程仍为$f(n)=max(f(n-1),f(n-2)+num)：
+* 状态方程仍为$f(n)=max(f(n-1),f(n-2)+num)$：
 ```java
 class Solution {
     public int rob(int[] nums) {
