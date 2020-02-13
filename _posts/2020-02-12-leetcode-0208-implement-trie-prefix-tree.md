@@ -12,6 +12,7 @@ tags: [solving LeetCode]
 
 ### 题解
 1. 法一
+
 ```java
 class TrieNode{
     TrieNode[] child;
@@ -65,7 +66,6 @@ class Trie {
         return true;
     }
 }
-
 /**
  * Your Trie object will be instantiated and called as such:
  * Trie obj = new Trie();
