@@ -12,6 +12,7 @@ tags: [solving LeetCode]
 
 ### 题解
 1. 法一：用一个队列即可实现。当入栈时，先将元素`x`入队，再将除了`x`之外的元素重新入队；当出栈时，直接将元素出队。
+
 ```java
 class MyStack {
     private Queue<Integer> queue;
