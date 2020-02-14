@@ -125,7 +125,8 @@ class MapSum {
         return pre.isEnd ? pre.sum : 0;
     }
 }
- ```
+```
+
 2. 法二（两个哈希表）：也可以使用一个哈希表来代替Trie存储字符中每个前缀及其对应的值。
 
 ```java
@@ -157,4 +158,4 @@ class MapSum {
         return 0;
     }
 }
- ```
+```
