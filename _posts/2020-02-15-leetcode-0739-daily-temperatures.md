@@ -19,15 +19,37 @@ class Solution {
         if(T == null || T.length == 0)
             return res;
         for(int i = 0; i < T.length; i++){
-            int cnt = 0;
             for(int j = i + 1; j < T.length; j++){
-                cnt++;
                 if(T[j] > T[i]){
-                    res[i] = cnt;
+                    res[i] = j - i;
                     break;
                 }
             }
         }
+        return res;  
+    }
+}
+```
+* 改进：上述方法中，会出现重复访问的情况。因此，可以从后往前遍历数组，并比较当前元素`cur`与其后一个元素`next`的大小；若`cur`大，则通过`next`找到比`next`大的元素，并进行比较；若`cur`小，则`next`就是最开始比它大的元素。通过后面元素的信息，可以减少元素比较次数。
+```java
+class Solution {
+    public int[] dailyTemperatures(int[] T) {
+        int[] res = new int[T.length];
+        if(T == null || T.length == 0)
+            return res;
+        for(int i = T.length - 2; i >= 0; i--){
+            //j下标的递增就是利用后面元素的信息
+            for(int j = i + 1; j < T.length; j += res[j])
+                if(T[j] > T[i]){
+                    res[i] = j - i;
+                    break;
+                }
+                //这是T[j] <= T[i]的情况，因此如果没有比T[j]大的数，肯定也没有比T[i]大的数。
+                else if(res[j] == 0){
+                    res[i] = 0;
+                    break;
+                }
+        }        
         return res;  
     }
 }
