@@ -14,19 +14,16 @@ tags: [solving LeetCode]
 1. 法一（哈希表）：用哈希表存储各元素的出现次数。遍历哈希表，更新和谐子序列的最大长度。
 ```java
 class Solution {
-    public int[] nextGreaterElements(int[] nums) {
-        int length = nums.length;
-        int[] res = new int[length];
-        for(int i = 0; i < length; i++)
-            res[i] = -1;
-        for(int i = 0; i < length; i++)
-            for(int j = i + 1; j < nums.length + i; j++){
-                if(nums[j % length] > nums[i]){
-                    res[i] = nums[j % length];
-                    break;
-                }    
-            }
-        return res;
+    public int findLHS(int[] nums) {
+        int max = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i : nums)
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        for(int i : nums){
+            if(map.containsKey(i + 1))
+                max = Math.max(max, map.get(i) + map.get(i + 1));
+        }
+        return max;
     }
 }
 ```
