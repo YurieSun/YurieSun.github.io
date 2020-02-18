@@ -50,5 +50,4 @@ class Solution {
         return true;
     }
 }
-
 ```
