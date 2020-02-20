@@ -1,14 +1,14 @@
 ---
 layout: post
-title: LeetCode 0647 题解
-description: "回文子串"
+title: LeetCode 0005 题解
+description: "最长回文子串"
 keywords: test
 category: LeetCode
 tags: [solving LeetCode]
 ---
 
 ### 题目描述
-[回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
+[最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
 ### 题解
 1. 法一：从第一个字符开始，向左右两边扩展字符串，并判断是否为回文子串。
