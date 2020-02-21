@@ -34,7 +34,6 @@ public String replaceSpace(StringBuffer str) {
     for (int i = 0; i <= P1; i++)
         if (str.charAt(i) == ' ')
             str.append("  ");
-
     int P2 = str.length() - 1;
     while (P1 >= 0 && P2 > P1) {
         char c = str.charAt(P1--);
