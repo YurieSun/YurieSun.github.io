@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [单词搜索](https://leetcode-cn.com/problems/word-search/)
 
 ### 题解
-1. 法一（dfs）：对于每一个匹配的字符，对其上下左右进行搜索，查看是否有下一个字符，有则继续往下搜索，没有则回溯。
+1. 法一（二分法）：直接遍历数组找到最小值，时间复杂度为$O(n)$，使用二分法可将时间复杂度降为$O(\lg n)$。这道题与[153题](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)相似，只是本题中会出现重复元素。因此，在处理中间元素`nums[mid]`等于数组最右边的元素`nums[right]`的情况时，进行`right--`操作即可。首先`nums[right]`不可能是唯一的最小值，否则不会出现`nums[mid]==nums[right]`，因此，可将该元素删除，并继续循环。
 ```java
 class Solution {
     public int findMin(int[] nums) {
