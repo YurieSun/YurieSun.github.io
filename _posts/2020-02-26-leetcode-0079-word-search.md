@@ -18,7 +18,7 @@ class Solution {
     private String word;
     private char[][] board;
     private boolean[][] marked;
-    private int[][] directions;
+    private int[][] directions = {{-1, 0},{0, -1},{1, 0},{0, 1}};
     public boolean exist(char[][] board, String word) {
         m = board.length;
         if(m == 0)
@@ -27,7 +27,6 @@ class Solution {
         this.word = word;
         this.board = board;
         marked = new boolean[m][n];
-        directions = new int[][]{{-1, 0},{0, -1},{1, 0},{0, 1}};
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++)
                 if(dfs(i, j, 0))
