@@ -17,7 +17,7 @@ class Solution {
     private int m, n;
     private String word;
     private char[][] board;
-    private boolean marked[][];
+    private boolean[][] marked;
     private int[][] directions;
 
     public boolean exist(char[][] board, String word) {
