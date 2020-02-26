@@ -19,7 +19,6 @@ class Solution {
     private char[][] board;
     private boolean[][] marked;
     private int[][] directions;
-
     public boolean exist(char[][] board, String word) {
         m = board.length;
         if(m == 0)
@@ -35,7 +34,6 @@ class Solution {
                     return true;
         }
         return false;
-
     }
     private boolean dfs(int i, int j, int start){
         if(start == word.length() - 1)
