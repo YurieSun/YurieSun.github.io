@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [整数拆分](https://leetcode-cn.com/problems/integer-break/)
 
 ### 题解
-1. 法一（数学）：根据前几个数字的拆分分析（参考 [整数拆分（贪心，清晰图表解析](https://leetcode-cn.com/problems/integer-break/solution/343-zheng-shu-chai-fen-tan-xin-by-jyd/)）和数学推导（参考 [整数拆分 - 数学方法（含完整推导）](https://leetcode-cn.com/problems/integer-break/solution/zheng-shu-chai-fen-shu-xue-fang-fa-han-wan-zheng-t/)）可知，需要将数字`n`分成尽可能多的`3`；若余数为`0`，则恰好分完；若余数为`1`，则抽取一个`3`，并和`1`分为`2+2`；若余数为`2`，则该种分法也可以。根据上述方法，将`n`分完后，计算对应的乘积即可。
+1. 法一（数学）：根据前几个数字的拆分分析（参考 [整数拆分（贪心，清晰图表解析）](https://leetcode-cn.com/problems/integer-break/solution/343-zheng-shu-chai-fen-tan-xin-by-jyd/)）和数学推导（参考 [整数拆分 - 数学方法（含完整推导）](https://leetcode-cn.com/problems/integer-break/solution/zheng-shu-chai-fen-shu-xue-fang-fa-han-wan-zheng-t/)）可知，需要将数字`n`分成尽可能多的`3`；若余数为`0`，则恰好分完；若余数为`1`，则抽取一个`3`，并和`1`分为`2+2`；若余数为`2`，则该种分法也可以。根据上述方法，将`n`分完后，计算对应的乘积即可。
 ```java
 class Solution {
     public int integerBreak(int n) {
