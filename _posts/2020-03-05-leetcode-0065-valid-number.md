@@ -89,15 +89,8 @@ class Solution {
     public boolean isNumber(String s) {
         int state = 0;
         int finals = 0b101101000;
-        int[][] transfer = new int[][]{{ 0, 1, 6, 2,-1},
-                                       {-1,-1, 6, 2,-1},
-                                       {-1,-1, 3,-1,-1},
-                                       { 8,-1, 3,-1, 4},
-                                       {-1, 7, 5,-1,-1},
-                                       { 8,-1, 5,-1,-1},
-                                       { 8,-1, 6, 3, 4},
-                                       {-1,-1, 5,-1,-1},
-                                       { 8,-1,-1,-1,-1}};
+        // 二维数组的定义总是会导致页面出现错误，具体定义见下图。
+        int[][] transfer;
         char[] ss = s.toCharArray();
         for(int i=0; i < ss.length; ++i) {
             int id = make(ss[i]);
@@ -109,7 +102,8 @@ class Solution {
     }
 }
 ```
-* 问题：如何构建有限状态机（DFA）？
+* 问题：如何构建有限状态机（DFA）？本题中DFA对应的二维数组表示如下图所示：
+!(/assets/images/LeetCode/0065.PNG)
 3. 法三（正则表达式）：通过正则表达式进行匹配。
 ```java
 /*
