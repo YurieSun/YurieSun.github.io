@@ -103,7 +103,7 @@ class Solution {
 }
 ```
 * 问题：如何构建有限状态机（DFA）？本题中DFA对应的二维数组表示如下图所示：
-
+![DFA对应的二维数组]({{ 'assets/images/LeetCode/0065.PNG' }})
 3. 法三（正则表达式）：通过正则表达式进行匹配。
 ```java
 /*
