@@ -41,3 +41,18 @@ class Solution {
     }
 }
 ```
+3. 法三（头插法）
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        while(head != null){
+            ListNode next = head.next;
+            head.next = dummy.next;
+            dummy.next = head;
+            head = next;
+        }
+        return dummy.next;
+    }
+}
+```
