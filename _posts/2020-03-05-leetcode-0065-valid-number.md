@@ -70,7 +70,25 @@ class Solution {
     }
 }
 ```
-2. 法二（状态机）
+2. 法二（正则表达式）：通过正则表达式进行匹配。
+```java
+/*
+    [] ： 字符集合
+    () ： 分组
+    ? ： 重复 0 ~ 1 次
+    + ： 重复 1 ~ n 次
+    * ： 重复 0 ~ n 次
+    . ： 任意字符
+    \\. ： 转义后的 .
+    \\d ： 数字
+*/
+class Solution {
+    public boolean isNumber(String s) {
+        return s.trim().matches("[-+]?(\\d+\\.?|\\.\\d+)\\d*(e[-+]?\\d+)?");
+    }
+}
+```
+3. 法三（状态机）
 ```java
 class Solution {
     public int make(char c) {
@@ -102,24 +120,5 @@ class Solution {
     }
 }
 ```
-问题：如何构建有限状态机（DFA）？本题中DFA对应的二维数组表示如下图所示：  
+* 问题：如何构建有限状态机（DFA）？本题中DFA对应的二维数组表示如下图所示：  
 ![DFA对应的二维数组]({{ '/assets/images/LeetCode/0065.PNG' }})
-
-3. 法三（正则表达式）：通过正则表达式进行匹配。
-```java
-/*
-    [] ： 字符集合
-    () ： 分组
-    ? ： 重复 0 ~ 1 次
-    + ： 重复 1 ~ n 次
-    * ： 重复 0 ~ n 次
-    . ： 任意字符
-    \\. ： 转义后的 .
-    \\d ： 数字
-*/
-class Solution {
-    public boolean isNumber(String s) {
-        return s.trim().matches("[-+]?(\\d+\\.?|\\.\\d+)\\d*(e[-+]?\\d+)?");
-    }
-}
-```
