@@ -23,7 +23,7 @@ class Solution {
             return res;
         int n = matrix[0].length;
         boolean[][] marked = new boolean[m][n];
-        int[][] direction=new int[][]{{0,1},{1,0},{0,-1},{-1,0}};
+        int[][] direction;
         int x = 0, y = 0, k = 0;
         for(int i = 0; i < m * n; i++){
             res.add(matrix[x][y]);
