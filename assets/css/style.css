@@ -138,6 +138,7 @@ blockquote p{margin:15px 0; color: #999999}
 
 .wrapper img {
   margin-top: 10px;
+  margin-bottom: 10px;
   clear: both;
   display: block;
   max-width: 100%;
