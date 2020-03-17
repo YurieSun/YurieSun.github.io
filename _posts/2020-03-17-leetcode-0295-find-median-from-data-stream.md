@@ -33,12 +33,6 @@ class MedianFinder {
             return (double) list.get((N - 1) / 2);
     }
 }
-/**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder obj = new MedianFinder();
- * obj.addNum(num);
- * double param_2 = obj.findMedian();
- */
 ```
 2. 法二（二分）：每次插入元素时，需要保持数组的有序性。通过二分法找到元素应该插入的位置，并将其插入。由于在数组中插入元素需要移动该位置及其后面的元素，因此时间复杂度为 $O(n)$。
 ```java
