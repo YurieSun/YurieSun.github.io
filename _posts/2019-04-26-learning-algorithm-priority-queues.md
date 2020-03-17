@@ -114,7 +114,7 @@ tags: [algorithm]
     //把比父节点大的子节点上移至正确位置
     private void swim(int k)
     {
-        while (k > 1 && less(k, k/2))
+        while (k > 1 && less(k/2, k))
         {
             exch(k, k/2);
             k = k/2;
@@ -138,7 +138,7 @@ tags: [algorithm]
         while (2*k <= N)
         {
             int j = 2*k;
-            if (less(j, j+1)) j++;//找到两个子节点中较大的进行交换
+            if (j < N && less(j, j+1)) j++;//找到两个子节点中较大的进行交换
             if (!less(k, j)) break;
             exch(k, j)
             k = j;

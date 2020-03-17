@@ -11,7 +11,7 @@ tags: [algorithm]
 
 ### Quicksort
 1. 基本思想  
-    对数组进行洗牌；将数组分成两部分，使得对于某些j，a[j]是安书序排列的，即j的左边不会有比它大的，j的右边不会有比它小的；递归对每部分进行排序。
+    对数组进行洗牌；将数组分成两部分，使得对于某些`j`，`a[j]`是按顺序排列的，即`j`的左边不会有比它大的，`j`的右边不会有比它小的；递归对每部分进行排序。
 2. partition的java实现
     ```java
     private static int partition(Comparable[] a, int lo, int hi)
