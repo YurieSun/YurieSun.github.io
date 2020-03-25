@@ -1,4 +1,4 @@
-Sen's Blog
+Sun's Blog
 ======
 
 > 该博客使用 jekyll+bootstrap-3+Markdown 搭建。
