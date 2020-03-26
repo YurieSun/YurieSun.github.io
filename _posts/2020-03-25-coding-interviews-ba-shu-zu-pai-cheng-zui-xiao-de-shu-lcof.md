@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [把数组排成最小的数](https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/)
 
 ### 题解
-1. 法一：排序时传入一个比较器，若`s1+s2>s2+s11`，则再拼接时应该把`s2`放在前面。
+1. 法一：排序时传入一个比较器，若`s1 + s2 > s2 + s1`，则再拼接时应该把`s2`放在前面。
 ```java
 class Solution {
     public String minNumber(int[] nums) {
