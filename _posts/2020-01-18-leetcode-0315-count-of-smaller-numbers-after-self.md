@@ -69,5 +69,52 @@ class Solution {
     }
 }
 ```
-
+* 另一种写法（可与[剑指Offer 51题 数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)对比着看）：
+```java
+class Solution {
+    private int[] cnt;
+    private int[] index;
+    public List<Integer> countSmaller(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        if (nums == null || nums.length == 0)
+            return list;
+        cnt = new int[nums.length];
+        index = new int[nums.length];
+        for (int i = 0; i < nums.length; i++)
+            index[i] = i;
+        mergeSort(nums, 0, nums.length - 1);
+        for (int c : cnt)
+            list.add(c);
+        return list;
+    }
+    public void mergeSort(int[] arr, int left, int right) {
+        if (left == right)
+            return;
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+    public void merge(int[] arr, int left, int mid, int right) {
+        int pl = left, pr = mid + 1;
+        int i = 0;
+        int[] helper = new int[right - left + 1];
+        while (pl <= mid && pr <= right) {
+            // 从样例发现相等元素也要算进去，因此有等号。
+            if (arr[index[pl]] <= arr[index[pr]])
+                cnt[index[pl]] += pr - mid - 1;
+            helper[i++] = arr[index[pl]] <= arr[index[pr]] ? index[pl++] : index[pr++];
+        }
+        while (pl <= mid) {
+            cnt[index[pl]] += right - mid;
+            helper[i++] = index[pl++];
+        }
+        while (pr <= right) {
+            helper[i++] = index[pr++];
+        }
+        for (int j = 0; j < helper.length; j++)
+            index[left + j] = helper[j];
+    }
+}
+```
 2. 其余方法待学习。
