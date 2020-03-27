@@ -17,6 +17,7 @@ tags: [solving LeetCode]
 class Solution {
     public int nthUglyNumber(int n) {
         Queue<Long> q = new PriorityQueue<>();
+        //改成long是为了防止溢出
         long res = 1;
         q.add(res);
         while (n > 0) {
@@ -27,7 +28,6 @@ class Solution {
             q.add(res * 2);
             q.add(res * 3);
             q.add(res * 5);
-
         }
         return (int) res;
     }
