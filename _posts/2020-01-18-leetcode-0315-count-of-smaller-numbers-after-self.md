@@ -17,7 +17,6 @@ class Solution {
     private int[] index;
     private int[] counts;
     private int[] aux;
-    
     public List<Integer> countSmaller(int[] nums) {
         List<Integer> ans = new ArrayList<>();
         int len = nums.length;
