@@ -68,7 +68,7 @@ class Solution {
     }
 }
 ```
-* 另一种写法（可与[剑指Offer 51题 数组中的逆序对](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/)对比着看）：
+* 另一种写法（可与 [剑指Offer 51题 数组中的逆序对](https://yuriesun.github.io/leetcode/coding-interviews-shu-zu-zhong-de-ni-xu-dui-lcof) 对比着看）：
 ```java
 class Solution {
     private int[] cnt;
