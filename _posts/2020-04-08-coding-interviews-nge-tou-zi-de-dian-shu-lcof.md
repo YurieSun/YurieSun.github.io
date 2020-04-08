@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [n个骰子的点数](https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/)
 
 ### 题解
-1. 法一（动态规划）：数组`dp[i][j]`表示用`i`个骰子掷出点数为`j`的情况数，则状态转移方程为 $dp[i][j]=\sum\limits_{k=1}^{6}dp[i-1][j-k]$。这是由于第`i`个骰子的点数为`1`到`6`，所以用`i`个骰子掷出点数为`j`的情况数就是用`i-1`个骰子分别掷出`j-1`, `j-2`, ..., `j-6`的情况总数。
+1. 法一（动态规划）：数组`dp[i][j]`表示用`i`个骰子掷出点数为`j`的情况数，则状态转移方程为 $dp[i][j]=\sum \limits_{k=1}^{6}dp[i-1][j-k]$。这是由于第`i`个骰子的点数为`1`到`6`，所以用`i`个骰子掷出点数为`j`的情况数就是用`i-1`个骰子分别掷出`j-1`, `j-2`, ..., `j-6`的情况总数。
 ```java
 class Solution {
         public double[] twoSum(int n) {
