@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [括号生成](https://leetcode-cn.com/problems/generate-parentheses/)
 
 ### 题解
-1. 法一（DFS）：`left`和`right`分别表示未使用的左括号和右括号的数量。当左括号和右括号都是用完之后，将得到的字符串添加进结果集。剪枝是为了保证生成的括号是有效的，当`left > right`时，说明右括号使用的更多，这种情况就会使括号无效，因为多出来的右括号没有相对应的左括号。
+1. 法一（DFS）：`left`和`right`分别表示未使用的左括号和右括号的数量。当左括号和右括号都使用完之后，将得到的字符串添加进结果集。剪枝是为了保证生成的括号是有效的，当`left > right`时，说明右括号使用的更多，这种情况就会使括号无效，因为多出来的右括号没有相对应的左括号。
 ```java
 class Solution {
     public List<String> generateParenthesis(int n) {
