@@ -20,8 +20,8 @@ class Solution {
         }
         int sum = 0;
         // 求和
-        for (int x : nums) {x
-            sum += x;x
+        for (int x : nums) {
+            sum += x;
         }
         // 若和为奇数，肯定不存在。
         if ((sum & 1) != 0) {
@@ -52,6 +52,7 @@ class Solution {
     }
 }
 ```
+* 也可以只初始化为`dp[0][0]=true`，然后从第1行第0个位置开始计算。
 * 空间压缩：使用一维数组。
 ```java
 class Solution {
