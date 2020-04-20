@@ -37,7 +37,7 @@ class Solution {
         }
         // 由于数组dp是从1开始表示数组nums中第0个物品的，因此这里nums下标取i-1。
         for (int i = 1; i <= N; i++) {
-            for (int j = 0; j <= W; j++) {
+            for (int j = 1; j <= W; j++) {
                 // 可以装下当前物品，就可选择装或不装。
                 if (j >= nums[i - 1]) {
                     dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
@@ -71,6 +71,7 @@ class Solution {
         boolean[] dp = new boolean[W + 1];
         dp[0] = true;
         for (int i = 1; i < N; i++) {
+            // 需要从后往前遍历，防止dp[j-nums[i-1]]被覆盖。
             for (int j = W; j >= 0; j--) {
                 if (j >= nums[i - 1]) {
                     dp[j] = dp[j] || dp[j - nums[i - 1]];
