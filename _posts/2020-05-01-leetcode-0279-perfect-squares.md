@@ -11,27 +11,16 @@ tags: [solving LeetCode]
 [完全平方数](https://leetcode-cn.com/problems/perfect-squares/)
 
 ### 题解
-1. 法一（动态规划）：状态方程和斐波那契数列相同，需要注意各个情况的讨论。
+1. 法一（动态规划）
 ```java
 class Solution {
-    public int numDecodings(String s) {
-        if (s == null || s.length() == 0)
-            return 0;
-        int n = s.length();
+    public int numSquares(int n) {
         int[] dp = new int[n + 1];
-        dp[0] = 1;
-        dp[1] = s.charAt(0) == '0' ? 0 : 1;
-        for (int i = 2; i <= n; i++) {
-            int one = s.charAt(i - 1) - '0';
-            // 当前字符不为0，才可以看成单个字符进行解码。
-            if (one != 0)
-                dp[i] = dp[i - 1];
-            // 若当前字符的前一个字符为0，则只能将当前字符看成一个字符，无法与前一个字符组成两位数。
-            if (s.charAt(i - 2) == '0')
-                continue;
-            int two = Integer.valueOf(s.substring(i - 2, i));
-            if (two <= 26) {
-                dp[i] += dp[i - 2];
+        for (int i = 1; i <= n; i++) {
+            // 先将每个值设为最大
+            dp[i] = i;
+            for (int j = 1; j * j <= i; j++) {
+                dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
             }
         }
         return dp[n];
