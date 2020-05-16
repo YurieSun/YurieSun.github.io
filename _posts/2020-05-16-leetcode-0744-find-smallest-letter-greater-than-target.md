@@ -25,7 +25,7 @@ class Solution {
             else if (letters[mid] < target)
                 left = mid + 1;
         }
-        if (right < 0 || left == letters.length)
+        if (left == letters.length)
             return letters[0];
         return letters[left];
     }
