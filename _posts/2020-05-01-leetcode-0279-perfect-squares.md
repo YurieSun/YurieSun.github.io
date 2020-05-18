@@ -27,3 +27,32 @@ class Solution {
     }
 }
 ```
+2. 法二（BFS）：可以想成一棵以`n`为起点的多叉树，不断往下分解，直到叶子节点出现`0`，说明已经分解完，且是最少的分解个数，相当于在求最短路径。
+```java
+class Solution {
+    public int numSquares(int n) {
+        Queue<Integer> q = new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+        q.add(n);
+        visited.add(n);
+        int step = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            step++;
+            for (int i = 0; i < size; i++) {
+                int cur = q.poll();
+                for (int j = 1; j * j <= cur; j++) {
+                    int x = cur - j * j;
+                    if (x == 0)
+                        return step;
+                    if (visited.contains(x))
+                        continue;
+                    q.add(x);
+                    visited.add(x);
+                }
+            }
+        }
+        return -1;
+    }
+}
+```
