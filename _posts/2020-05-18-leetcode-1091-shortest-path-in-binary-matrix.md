@@ -46,3 +46,5 @@ class Solution {
     }
 }
 ```
+* 这里的二维数组定义如下图所示（分别对应一个格子周围八个方向）：
+![二维数组定义]({{ '/assets/images/LeetCode/1091.PNG' }})
