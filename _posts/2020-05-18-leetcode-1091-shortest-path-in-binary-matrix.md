@@ -21,7 +21,7 @@ class Solution {
         if (grid[0][0] == 1 || grid[m - 1][n - 1] == 1)
             return -1;
         Queue<int[]> q = new LinkedList<>();
-        int[][] dir = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+        int[][] dir;
         q.add(new int[]{0, 0});
         grid[0][0] = 1;
         int step = 1;
