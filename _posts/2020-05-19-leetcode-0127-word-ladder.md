@@ -8,7 +8,7 @@ tags: [solving LeetCode]
 ---
 
 ### 题目描述
-[dancijiel](https://leetcode-cn.com/problems/word-ladder/)
+[单词接龙](https://leetcode-cn.com/problems/word-ladder/)
 
 ### 题解
 1. 法一（BFS）
