@@ -15,7 +15,7 @@ tags: [solving LeetCode]
 ```java
 class Solution {
     private int m, n;
-    private int[][] dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    private int[][] dir;
     public void solve(char[][] board) {
         if (board == null || board.length == 0 || board[0].length == 0)
             return;
@@ -53,7 +53,7 @@ class Solution {
 ```java
 class Solution {
     private int m, n;
-    private int[][] dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    private int[][] dir;
     public void solve(char[][] board) {
         if (board == null || board.length == 0 || board[0].length == 0)
             return;
