@@ -37,7 +37,6 @@ class Solution {
                     board[i][j] = 'X';
             }
         }
-
     }
     private void dfs(char[][] board, int i, int j) {
         if (i < 0 || i >= m || j < 0 || j >= n || board[i][j] != 'O')
@@ -75,7 +74,6 @@ class Solution {
                     board[i][j] = 'X';
             }
         }
-
     }
     private void bfs(char[][] board, int i, int j) {
         Queue<int[]> q = new LinkedList<>();
