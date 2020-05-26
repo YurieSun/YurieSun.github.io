@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode 0040 题解
+title: LeetCode 0216 题解
 description: "组合总和 III"
 keywords: test
 category: LeetCode
