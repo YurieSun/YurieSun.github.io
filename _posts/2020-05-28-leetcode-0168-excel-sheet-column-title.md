@@ -17,7 +17,6 @@ class Solution {
     public String convertToTitle(int n) {
         char[] map = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
         StringBuilder sb = new StringBuilder();
-        // n--;
         while (n != 0) {
             n--;
             sb.append(map[n % 26]);
