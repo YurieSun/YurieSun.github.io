@@ -31,3 +31,30 @@ class Solution {
     }
 }
 ```
+2. 法二（回溯）
+```java
+class Solution {
+    public int pathSum(TreeNode root, int sum) {
+        if (root == null)
+            return 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        return helper(root, sum, map, 0);
+    }
+    public int helper(TreeNode root, int sum, HashMap<Integer, Integer> map, int pathSum) {
+        // 终止条件
+        if (root == null)
+            return 0;
+        // 本层要做的事
+        int res = 0;
+        pathSum += root.val;
+        res += map.getOrDefault(pathSum - sum, 0);
+        map.put(pathSum, map.getOrDefault(pathSum, 0) + 1);
+        // 递归计算下一层
+        res += helper(root.left, sum, map, pathSum) + helper(root.right, sum, map, pathSum);
+        // 回溯
+        map.put(pathSum, map.get(pathSum) - 1);
+        return res;
+    }
+}
+```
