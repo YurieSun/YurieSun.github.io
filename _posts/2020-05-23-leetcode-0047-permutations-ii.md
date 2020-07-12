@@ -1,7 +1,7 @@
 ---
 layout: post
-title: LeetCode 0046 题解
-description: "全排列"
+title: LeetCode 0047 题解
+description: "全排列 II"
 keywords: test
 category: LeetCode
 tags: [solving LeetCode]
