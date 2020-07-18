@@ -11,7 +11,7 @@ tags: [solving LeetCode]
 [计数二进制子串](https://leetcode-cn.com/problems/count-binary-substrings/)
 
 ### 题解
-1. 法一：对于相邻两组0和1，可以构成满足条件的子串数量为0和1的个数的较小值。因此，可以用一个数组存储字符串中每一段连续的0和1的个数，并再次对数组扫描，来统计总个数。特别要注意到达数组末尾时，没有进入字符不等的条件中，使得最后两组的值没有统计，因此还需加上最后一组的值。
+1. 法一：对于相邻两组0和1，可以构成满足条件的子串数量为0和1的个数的较小值。因此，可以用一个数组存储字符串中每一段连续的0和1的个数，并再次对数组扫描，来统计总个数。
 ```java
 class Solution {
     public int countBinarySubstrings(String s) {
@@ -33,7 +33,7 @@ class Solution {
     }
 }
 ```
-* 改进：每次只用到了相邻两个值，因此可以用两个变量来代替数组进行存储。
+* 改进：每次只用到了相邻两个值，因此可以用两个变量来代替数组进行存储。特别要注意到达字符末尾时，没有进入else的条件中，使得最后两组的值没有统计，因此还需加上最后一组的值。
 ```java
 class Solution {
     public int countBinarySubstrings(String s) {
