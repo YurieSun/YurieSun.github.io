@@ -60,31 +60,40 @@ class MinStack {
 
 ```java
 class MinStack {
-    private Stack<Integer> dataStack;
-    private Stack<Integer> minStack;
-    /** initialize your data structure here. */
+    private Deque<Integer> data;
+    private Deque<Integer> min;
+
     public MinStack() {
-        dataStack = new Stack<>();
-        minStack = new Stack<>();
+        data = new LinkedList<>();
+        min = new LinkedList<>();
     }
-    
+
     public void push(int x) {
-        dataStack.push(x);
-        if(minStack.isEmpty() || x <= minStack.peek())
-            minStack.push(x);
+        data.push(x);
+        if (min.isEmpty() || x <= min.peek()) {
+            min.push(x);
+        }
     }
-    
+
     public void pop() {
-        if(dataStack.pop() == minStack.peek())
-            minStack.pop();
+        /**
+         * 注意：原来的写法 if(data.pop() == min.peek())进行最小值栈是否需要pop的判断有问题。
+         * 这是因为Deque中存放的是Integer，若直接出栈进行比较，比较的是对象而不是值，
+         * 因此会出现值相等而引用不同造成的if判断错误。所以先出栈变为int，此时才是判断值是否相等。
+         *
+         **/
+        int res = data.pop();
+        if (res == min.peek()) {
+            min.pop();
+        }
     }
-    
+
     public int top() {
-        return dataStack.peek();
+        return data.peek();
     }
-    
+
     public int getMin() {
-        return minStack.peek();
+        return min.peek();
     }
 }
 ```
