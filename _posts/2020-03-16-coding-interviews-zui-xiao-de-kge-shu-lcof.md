@@ -26,39 +26,36 @@ class Solution {
 ```java
 class Solution {
     public int[] getLeastNumbers(int[] arr, int k) {
-        if (arr == null || arr.length == 0 || k <= 0)
+        if(arr==null|arr.length==0||k==0){
             return new int[0];
-        int lo = 0, hi = arr.length - 1;
-        while (lo < hi) {
-            int cut = quicksort(arr, 0, arr.length - 1);
-            if (cut < k)
-                lo = cut + 1;
-            else if (cut > k)
-                hi = cut - 1;
-            else
-                break;
         }
-        return  Arrays.copyOf(arr,k);
+        int left=0,right=arr.length-1;
+        while(true){
+            int index=partition(arr,left,right);
+            // k-1为第k个数的下标
+            if(index==k-1){
+                return Arrays.copyOf(arr,k);
+            }else if(index>k-1){
+                right=index-1;
+            }else {
+                left=index+1;
+            }
+        }
     }
-
-    private int quicksort(int[] nums, int lo, int hi) {
-        int i = lo, j = hi + 1;
-        while (true) {
-            while (nums[++i] < nums[lo])
-                if (i == hi) break;
-            while (nums[--j] > nums[lo])
-                if (j == lo) break;
-            if (i >= j)
-                break;
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
-
+    public int partition(int[] nums,int left,int right){
+        int less=left;
+        for(int i=left+1;i<=right;i++){
+            if(nums[i]<nums[left]){
+                swap(nums,++less,i);
+            }
         }
-        int temp = nums[lo];
-        nums[lo] = nums[j];
-        nums[j] = temp;
-        return j;
+        swap(nums,less,left);
+        return less;
+    }
+    public void swap(int[] nums ,int i,int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
     }
 }
 ```
