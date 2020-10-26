@@ -26,13 +26,17 @@ class Solution {
         // 分情况讨论
         for(int i = 1; i <= m; i++)
             for(int j = 1; j <= n; j++){
+                // s的第i-1个字符和p的第j-1个字符能对上或者可以替换为任意字符的情况
                 if(s.charAt(i-1) == p.charAt(j-1) || p.charAt(j-1) == '.')
                     dp[i][j] = dp[i-1][j-1];
+                // 对不上时，如果p的第j-1个字符是‘*’，还有机会配上
                 else if(p.charAt(j-1) == '*'){
-                    if(p.charAt(j-2) != s.charAt(i-1) && p.charAt(j-2) == '.')
+                    // 这时p的第j-2个字符加上*也无法匹配，此时让这两个字符都消失，即p[i-2]重复0次
+                    if(p.charAt(j-2) != s.charAt(i-1) && p.charAt(j-2) != '.')
                         dp[i][j] = dp[i][j-2];
+                    // 可以配上，让p[i-2]分别重复0次、1次、多次，任意一种配上即可
                     else
-                        dp[i][j] = (dp[i-1][j] || dp[i][j-1] || dp[i][j-2]);
+                        dp[i][j] = (dp[i][j-2] || dp[i-1][j-2] || dp[i-1][j]);
                 }
             }
         return dp[m][n];
